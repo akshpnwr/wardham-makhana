@@ -1,0 +1,812 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "text_UmYUFf": {
+          "type": "text",
+          "settings": {
+            "text": "— Roasted in small batches",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Crunch naturally. <em>Snack mindfully.</em>",
+            "heading_size": "h0"
+          }
+        },
+        "text_RjeGCR": {
+          "type": "text",
+          "settings": {
+            "text": "Roasted makhana made with honest ingredients, bold flavours, and everyday nutrition.",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop Now",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "Explore Flavours",
+            "button_link_2": "shopify://collections/all",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "text_UmYUFf",
+        "heading",
+        "text_RjeGCR",
+        "button"
+      ],
+      "custom_css": [
+        ".caption-with-letter-spacing,.banner__heading {color: #0a3a24;}",
+        ".caption-with-letter-spacing {font-size: 14px;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/milk-swirling-as-poured-in-coffee.jpg",
+        "image_overlay_opacity": 10,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "multicolumn_T4Tpy9": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_dCYpey": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/high-protein.png",
+            "title": "",
+            "text": "<p>High Protein</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_k66w8p": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/roasted-not-fried.png",
+            "title": "",
+            "text": "<p>Roasted, Not Fried</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WUzLCk": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/no-preservatives.png",
+            "title": "",
+            "text": "<p>No Preservatives</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_fVnHgn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/made-in-india.png",
+            "title": "",
+            "text": "<p>Made in India</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_dCYpey",
+        "column_k66w8p",
+        "column_WUzLCk",
+        "column_fVnHgn"
+      ],
+      "custom_css": [
+        ".multicolumn-card__image-wrapper--third-width {width: 20%;}",
+        ".multicolumn-card__info {padding-block: 10px; text-transform: uppercase;}",
+        ".multicolumn-card__info .rte {font-size: 14px;}",
+        "@media (max-width: 480px) {.multicolumn-card__image-wrapper--third-width {width: 25%; } .multicolumn-card__info {padding-inline: 10px;} .multicolumn-card__info .rte {font-size: 12px; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-f01bb9e6-5add-42db-ac01-912ef9e5c861",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".title {font-size: 14px; font-family: var(--font-body-family);}",
+        ".rte {font-family: var(--font-heading-family);}"
+      ],
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "— FLAVOURS.",
+        "heading_size": "h2",
+        "description": "<h1>A quiet pantry of everyday flavour. </h1>",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 84,
+        "padding_bottom": 76
+      }
+    },
+    "multicolumn_F9ncHr": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_pXLn3n": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/leaf.png",
+            "title": "Premium Quality Makhana",
+            "text": "<p><br/>We carefully select high-quality fox nuts to ensure every bite is light, crunchy, and satisfying.<br/><br/></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_UJqknC": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/check-mark.png",
+            "title": "Roasted, Not Fried",
+            "text": "<p>Expertly roasted for the perfect crunch, offering a lighter snacking experience without compromising on taste.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_r8g6tQ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/heart.png",
+            "title": "Bold & Delicious Flavours",
+            "text": "<p>From classic Himalayan Salt & Pepper to zesty Pepperi and Cheddar Cheese, there's a flavour for every craving.<br/></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_UDqEgz": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/truck.png",
+            "title": "Freshly Packed",
+            "text": "<p>Packed with care to preserve freshness, flavour, and crunch from our kitchen to your doorstep.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_pXLn3n",
+        "column_UJqknC",
+        "column_r8g6tQ",
+        "column_UDqEgz"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".multicolumn-card__image-wrapper--third-width {width: 25%;}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Why Choose Wardham?",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-f01bb9e6-5add-42db-ac01-912ef9e5c861",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_MxjK8m": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_EKgUzy": {
+          "type": "caption",
+          "settings": {
+            "caption": "— Why Wardham",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "large"
+          }
+        },
+        "heading_8nrLJ7": {
+          "type": "heading",
+          "settings": {
+            "heading": "A snack that keeps its promises.",
+            "heading_size": "h1"
+          }
+        },
+        "text_GEcKUw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our makhana is slow-roasted to create a light, airy crunch without ever being deep-fried or coated in heavy oils. Naturally rich in complete plant protein and low in fat, it's a wholesome snack that delivers on both taste and nutrition. With under 120 kcal per serving, it's the perfect guilt-free choice for that 4pm craving. We use only hand-selected Grade-A Suta variety makhana sourced from the wetlands of Bihar, carefully sorted for their size and colour to ensure exceptional quality in every bite.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_PUzGYD": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "caption_EKgUzy",
+        "heading_8nrLJ7",
+        "text_GEcKUw",
+        "button_PUzGYD"
+      ],
+      "custom_css": [
+        ".image-with-text .rte {color: #7a7a76; font-size: 15px;}",
+        ".caption-with-letter-spacing {margin-bottom: 12px;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/home-why-wardham.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "padding_top": 36,
+        "padding_bottom": 88
+      }
+    },
+    "featured_collection_FrG9Q8": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".title {font-size: 14px; font-family: var(--font-body-family); text-align: center;}",
+        ".rte {font-family: var(--font-heading-family); text-align: center;}"
+      ],
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "",
+        "products_to_show": 4,
+        "title": "— BEST SELLERS",
+        "heading_size": "h2",
+        "description": "<h1>The pantry favourites.</h1>",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-f01bb9e6-5add-42db-ac01-912ef9e5c861",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 84,
+        "padding_bottom": 84
+      }
+    },
+    "ingredient_XEcmmf": {
+      "type": "ingredient",
+      "blocks": {
+        "image_PdWe93": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/home-ingredient-1.jpg"
+          }
+        },
+        "image_AY9CaH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/home-ingredient-2.jpg"
+          }
+        },
+        "text_QcYQCK": {
+          "type": "text",
+          "settings": {
+            "text": "\"From pond to pantry.\"",
+            "tile_color_scheme": "scheme-f01bb9e6-5add-42db-ac01-912ef9e5c861"
+          }
+        }
+      },
+      "block_order": [
+        "image_PdWe93",
+        "image_AY9CaH",
+        "text_QcYQCK"
+      ],
+      "name": "Ingredient",
+      "settings": {
+        "eyebrow": "— The Ingredient",
+        "heading": "Simple ingredients. <em>Nothing artificial.</em> Everything delicious.",
+        "heading_size": "h1",
+        "body": "<p>Our fox nuts are hand-picked from the wetlands of Bihar, sun-dried, then slow-roasted in tiny batches with cold-pressed oils and single-origin spices.</p>",
+        "link_label": "Read our sourcing story",
+        "link_url": "shopify://blogs/news",
+        "media_position": "left",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "padding_top": 140,
+        "padding_bottom": 140
+      }
+    },
+    "image_banner_G8UG7a": {
+      "type": "image-banner",
+      "blocks": {
+        "text_76i7cf": {
+          "type": "text",
+          "settings": {
+            "text": "— A QUIETER KIND OF SNACK",
+            "text_style": "body"
+          }
+        },
+        "heading_agTRP7": {
+          "type": "heading",
+          "settings": {
+            "heading": "Healthy snacking,<em>made effortless.</em>",
+            "heading_size": "hxl"
+          }
+        },
+        "text_7EgAdN": {
+          "type": "text",
+          "settings": {
+            "text": "Between meetings, chapters, long drives and quieter evenings — Wardham keeps up, gently.",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "text_76i7cf",
+        "heading_agTRP7",
+        "text_7EgAdN"
+      ],
+      "custom_css": [
+        ".banner:after {background: linear-gradient( rgba(15, 81, 50, 0.15) 0%, rgba(15, 81, 50, 0.55) 100% );}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/home-healthy-snacking.jpg",
+        "image_overlay_opacity": 100,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "scheme-d8cb8cf3-0d00-4774-a46f-7542f13a86b7",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "rich_text_piiUBm": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_anM9Rp": {
+          "type": "caption",
+          "settings": {
+            "caption": "— Nutrition",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "large"
+          }
+        },
+        "heading_nWQ8rW": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everything in. Nothing extra.",
+            "heading_size": "h1"
+          }
+        },
+        "text_BN9rg8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Wardham makhana is naturally rich in what your body wants, and quietly free of what it doesn't.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption_anM9Rp",
+        "heading_nWQ8rW",
+        "text_BN9rg8"
+      ],
+      "custom_css": [
+        ".rich-text__text {color: #7a7a76;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "full_width": true,
+        "padding_top": 88,
+        "padding_bottom": 16
+      }
+    },
+    "multicolumn_LcPqEe": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_3bJAkD": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/slow-roasted.png",
+            "title": "Slow Roasted",
+            "text": "<p>Never fried. Small batches for full flavour.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_wYMtxR": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gluten-free.png",
+            "title": "Gluten Free",
+            "text": "<p>Naturally gluten-free, certified from source.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_BheNny": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/high-fibre.png",
+            "title": "High Fibre",
+            "text": "<p>Supports digestion and long-lasting satiety.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_iPMmU8": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/high-protein_8b6c029e-a875-4b3f-a649-a705d5fdbb8a.png",
+            "title": "High Protein",
+            "text": "<p>9g of complete plant protein in every 30g serving.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_bxtEN4": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/rich-in-calcium.png",
+            "title": "Rich in Calcium",
+            "text": "<p>Naturally sourced calcium for stronger bones.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_h4RiKr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/low-calories.png",
+            "title": "Low Calories",
+            "text": "<p>Under 120 kcal per serving. Snack, guilt-free.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_3bJAkD",
+        "column_wYMtxR",
+        "column_BheNny",
+        "column_iPMmU8",
+        "column_bxtEN4",
+        "column_h4RiKr"
+      ],
+      "custom_css": [
+        ".multicolumn-card__info .rte {font-size: 13px; color: #7a7a76; margin-top: 0px;}",
+        ".multicolumn-card__info .inline-richtext {font-size: 20px; font-weight: 600;}",
+        ".multicolumn-card {padding-block: 20px; padding-inline: 25px; border: 1px solid rgba(15, 81, 50, 0.18); height: 100%;}",
+        ".grid {column-gap: 0; row-gap: 0;}",
+        ".multicolumn-card__image-wrapper--third-width {width: 23%;}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h0",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 88
+      }
+    },
+    "testimonials_v2_LrHAWU": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_r4aXhn": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The Peri Peri is dangerously good. I keep a pouch on my desk and one in the car. Zero guilt.</p>",
+            "name": "Ananya Sharma 1",
+            "location": "Mumbai",
+            "card_color_scheme": "scheme-9"
+          }
+        },
+        "testimonial_VaVr36": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The Peri Peri is dangerously good. I keep a pouch on my desk and one in the car. Zero guilt.</p>",
+            "name": "Ananya Sharma",
+            "location": "Mumbai",
+            "card_color_scheme": "scheme-9"
+          }
+        },
+        "testimonial_fWH7c7": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The Peri Peri is dangerously good. I keep a pouch on my desk and one in the car. Zero guilt.</p>",
+            "name": "Ananya Sharma",
+            "location": "Mumbai",
+            "card_color_scheme": ""
+          }
+        },
+        "testimonial_AejGHj": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Finally an Indian snack brand that treats packaging like a design object. And the makhana itself is exceptional.</p>",
+            "name": "Rohan Verma",
+            "location": "Bengaluru",
+            "card_color_scheme": ""
+          }
+        },
+        "testimonial_tpbawR": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Replaced our office biscuit jar with three Wardham tins. Team is happier, meetings feel calmer, honestly.</p>",
+            "name": "Priya Nair 5",
+            "location": "Delhi",
+            "card_color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_r4aXhn",
+        "testimonial_VaVr36",
+        "testimonial_fWH7c7",
+        "testimonial_AejGHj",
+        "testimonial_tpbawR"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "eyebrow": "— Kind Words",
+        "heading": "From our pantry to theirs.",
+        "heading_size": "h0",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-f01bb9e6-5add-42db-ac01-912ef9e5c861",
+        "padding_top": 84,
+        "padding_bottom": 108
+      }
+    },
+    "ss_instafeed_2_BBebnn": {
+      "type": "ss-instafeed-2",
+      "blocks": {
+        "slide_hFQw9p": {
+          "type": "slide",
+          "settings": {
+            "url": ""
+          }
+        },
+        "slide_TQ4zwy": {
+          "type": "slide",
+          "settings": {
+            "url": ""
+          }
+        },
+        "slide_7Cx7AH": {
+          "type": "slide",
+          "settings": {
+            "url": ""
+          }
+        },
+        "slide_wDtCwg": {
+          "type": "slide",
+          "settings": {
+            "url": ""
+          }
+        },
+        "slide_GmBX9F": {
+          "type": "slide",
+          "settings": {
+            "url": ""
+          }
+        },
+        "slide_AyGwzX": {
+          "type": "slide",
+          "settings": {
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_hFQw9p",
+        "slide_TQ4zwy",
+        "slide_7Cx7AH",
+        "slide_wDtCwg",
+        "slide_GmBX9F",
+        "slide_AyGwzX"
+      ],
+      "name": "SS - Instafeed #2",
+      "settings": {
+        "top": "— @wardham",
+        "top_custom": false,
+        "top_font": "josefin_sans_n4",
+        "top_size": 13,
+        "top_height": 130,
+        "top_align": "left",
+        "heading": "Everyday moments, everyday makhana.",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 40,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_mt": 12,
+        "subheading": "",
+        "subheading_custom": false,
+        "subheading_font": "josefin_sans_n4",
+        "subheading_size": 16,
+        "subheading_height": 130,
+        "subheading_align": "center",
+        "subheading_mt": 12,
+        "slider_mt": 28,
+        "slider_row": "4",
+        "slider_row_mobile": "1",
+        "slider_gap": 20,
+        "slider_gap_mobile": 32,
+        "autoplay": false,
+        "autoplay_speed": 3,
+        "nav_size": 40,
+        "nav_size_mobile": 30,
+        "hide_nav": true,
+        "hide_nav_mobile": false,
+        "image_radius": 0,
+        "top_color": "#0f5132",
+        "heading_color": "#0f5132",
+        "subheading_color": "#aba49d",
+        "nav_btn_bg": "#ffffff",
+        "nav_btn_hover_bg": "#e69e6c",
+        "nav_border": "#e69e6c",
+        "nav_border_hover": "#e69e6c",
+        "nav_icon": "#e69e6c",
+        "nav_hover_icon": "#ffffff",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "newsletter_JB6Vqx": {
+      "type": "newsletter",
+      "blocks": {
+        "paragraph_FwNreD": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>— THE WARDHAM PANTRY</p>"
+          }
+        },
+        "heading_4wRHFK": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the pantry.",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_KdKzxx": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Get new flavour launches, quiet recipes, and members-only offers — twice a month, never more.</p>"
+          }
+        },
+        "email_form_x9BLyW": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "paragraph_FwNreD",
+        "heading_4wRHFK",
+        "paragraph_KdKzxx",
+        "email_form_x9BLyW"
+      ],
+      "custom_css": [
+        ".newsletter .newsletter__subheading:nth-of-type(1) {font-size: 14px;}"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-d8cb8cf3-0d00-4774-a46f-7542f13a86b7",
+        "full_width": true,
+        "padding_top": 76,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "multicolumn_T4Tpy9",
+    "featured_collection",
+    "multicolumn_F9ncHr",
+    "image_with_text_MxjK8m",
+    "featured_collection_FrG9Q8",
+    "ingredient_XEcmmf",
+    "image_banner_G8UG7a",
+    "rich_text_piiUBm",
+    "multicolumn_LcPqEe",
+    "testimonials_v2_LrHAWU",
+    "ss_instafeed_2_BBebnn",
+    "newsletter_JB6Vqx"
+  ]
+}

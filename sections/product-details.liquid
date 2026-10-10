@@ -1,0 +1,659 @@
+{%- liquid
+  assign tab_desc = section.settings.tab_description_label
+  assign tab_nut = section.settings.tab_nutrition_label
+  assign tab_ing = section.settings.tab_ingredients_label
+-%}
+
+<div
+  class="wardham-details color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding isolate"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <style>
+    #wd-tab-desc-{{ section.id }}:checked ~ .wardham-details__tablist [data-tab="desc"],
+    #wd-tab-nut-{{ section.id }}:checked ~ .wardham-details__tablist [data-tab="nut"],
+    #wd-tab-ing-{{ section.id }}:checked ~ .wardham-details__tablist [data-tab="ing"] {
+      opacity: 1;
+      border-bottom-color: currentColor;
+    }
+    #wd-tab-desc-{{ section.id }}:checked ~ [data-panel="desc"],
+    #wd-tab-nut-{{ section.id }}:checked ~ [data-panel="nut"],
+    #wd-tab-ing-{{ section.id }}:checked ~ [data-panel="ing"] {
+      display: block;
+      animation: wardham-details-fade 0.4s ease;
+    }
+  </style>
+
+  <div class="page-width wardham-details__inner">
+
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="wardham-details__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="wardham-details__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="wardham-details__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="wardham-details__tabs" data-tabs>
+
+      <input type="radio" name="wd-tabs-{{ section.id }}" id="wd-tab-desc-{{ section.id }}" class="wardham-details__radio" checked>
+      <input type="radio" name="wd-tabs-{{ section.id }}" id="wd-tab-nut-{{ section.id }}" class="wardham-details__radio">
+      <input type="radio" name="wd-tabs-{{ section.id }}" id="wd-tab-ing-{{ section.id }}" class="wardham-details__radio">
+
+      <div class="wardham-details__tablist" role="tablist">
+        <label for="wd-tab-desc-{{ section.id }}" class="wardham-details__tab" data-tab="desc">{{ tab_desc }}</label>
+        <label for="wd-tab-nut-{{ section.id }}" class="wardham-details__tab" data-tab="nut">{{ tab_nut }}</label>
+        <label for="wd-tab-ing-{{ section.id }}" class="wardham-details__tab" data-tab="ing">{{ tab_ing }}</label>
+      </div>
+
+      {%- comment -%} ---------- DESCRIPTION ---------- {%- endcomment -%}
+      <div class="wardham-details__panel" data-panel="desc">
+        <div class="wardham-details__desc-grid">
+          <div class="wardham-details__desc-copy">
+            {%- if section.settings.description_heading != blank -%}
+              <h3 class="wardham-details__subheading">{{ section.settings.description_heading }}</h3>
+            {%- endif -%}
+            <div class="wardham-details__rte rte">{{ section.settings.description_body }}</div>
+          </div>
+
+          {%- assign spec_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'spec' -%}{%- assign spec_count = spec_count | plus: 1 -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if spec_count > 0 -%}
+            <dl class="wardham-details__specs">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'spec' -%}
+                  <div class="wardham-details__spec-row" {{ block.shopify_attributes }}>
+                    <dt class="wardham-details__spec-key">{{ block.settings.label }}</dt>
+                    <dd class="wardham-details__spec-val">{{ block.settings.value }}</dd>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </dl>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ---------- NUTRITION ---------- {%- endcomment -%}
+      <div class="wardham-details__panel" data-panel="nut">
+        <div class="wardham-details__nut-grid">
+          <div class="wardham-details__nut-facts">
+            {%- if section.settings.serving_note != blank -%}
+              <p class="wardham-details__serving">{{ section.settings.serving_note }}</p>
+            {%- endif -%}
+            {%- if section.settings.nutrition_heading != blank -%}
+              <h3 class="wardham-details__subheading">{{ section.settings.nutrition_heading }}</h3>
+            {%- endif -%}
+            <dl class="wardham-details__nut-list">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'nutrition' -%}
+                  <div class="wardham-details__nut-row" {{ block.shopify_attributes }}>
+                    <dt class="wardham-details__nut-label">{{ block.settings.label }}</dt>
+                    <dd class="wardham-details__nut-value">{{ block.settings.value }}</dd>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </dl>
+          </div>
+
+          <div class="wardham-details__nut-notes">
+            {%- if section.settings.notes_heading != blank -%}
+              <h4 class="wardham-details__notes-heading">{{ section.settings.notes_heading }}</h4>
+            {%- endif -%}
+            <div class="wardham-details__notes-stack">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'note' -%}
+                  <div class="wardham-details__note" {{ block.shopify_attributes }}>
+                    {%- if block.settings.icon != blank -%}
+                      <img
+                        class="wardham-details__note-icon"
+                        src="{{ block.settings.icon | image_url: width: 96 }}"
+                        alt="{{ block.settings.title | escape }}"
+                        width="32"
+                        height="32"
+                        loading="lazy"
+                      >
+                    {%- endif -%}
+                    <div class="wardham-details__note-text">
+                      <p class="wardham-details__note-title">{{ block.settings.title }}</p>
+                      <p class="wardham-details__note-desc">{{ block.settings.text }}</p>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} ---------- INGREDIENTS ---------- {%- endcomment -%}
+      <div class="wardham-details__panel" data-panel="ing">
+        {%- if section.settings.ingredients_heading != blank -%}
+          <h3 class="wardham-details__subheading">{{ section.settings.ingredients_heading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.ingredients_intro != blank -%}
+          <p class="wardham-details__ing-intro">{{ section.settings.ingredients_intro }}</p>
+        {%- endif -%}
+        <div class="wardham-details__ing-grid" style="--cols: {{ section.settings.ingredient_columns }};">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'ingredient' -%}
+              <div class="wardham-details__ing" {{ block.shopify_attributes }}>
+                {%- if block.settings.percent != blank -%}
+                  <div class="wardham-details__ing-pct">{{ block.settings.percent }}</div>
+                {%- endif -%}
+                <div class="wardham-details__ing-name">{{ block.settings.name }}</div>
+                {%- if block.settings.note != blank -%}
+                  <div class="wardham-details__ing-note">{{ block.settings.note }}</div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .wardham-details {
+    padding-top: var(--pt, 120px);
+    padding-bottom: var(--pb, 120px);
+  }
+  .wardham-details__inner {
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+
+  .wardham-details__head {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+  .wardham-details__eyebrow {
+    font-size: 1.2rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 1.6rem;
+    opacity: 0.85;
+  }
+  .wardham-details__heading {
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  /* --- Tabs (pure CSS via radio inputs) --- */
+  .wardham-details__radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .wardham-details__tablist {
+    display: flex;
+    gap: 4rem;
+    border-bottom: 1px solid rgba(15, 81, 50, 0.15);
+    margin-bottom: 5.6rem;
+  }
+  .wardham-details__tab {
+    cursor: pointer;
+    padding: 0 0 1.8rem;
+    margin-bottom: -1px;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid transparent;
+    opacity: 0.55;
+    transition: opacity 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .wardham-details__tab:hover { opacity: 0.85; }
+
+  .wardham-details__panel { display: none; }
+
+  @keyframes wardham-details-fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .wardham-details__subheading {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 400;
+    font-size: 3.4rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 2rem;
+  }
+
+  /* --- Description --- */
+  .wardham-details__desc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7.2rem;
+    align-items: start;
+  }
+  .wardham-details__rte {
+    font-size: 1.6rem;
+    line-height: 1.75;
+    font-weight: 300;
+    opacity: 0.9;
+  }
+  .wardham-details__rte > p { margin: 0; }
+  .wardham-details__rte > p + p { margin-top: 2rem; }
+
+  .wardham-details__specs { margin: 0; }
+  .wardham-details__spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(15, 81, 50, 0.12);
+  }
+  .wardham-details__spec-key {
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin: 0;
+  }
+  .wardham-details__spec-val {
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: right;
+  }
+
+  /* --- Nutrition --- */
+  .wardham-details__nut-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 7.2rem;
+    align-items: start;
+  }
+  .wardham-details__serving {
+    font-size: 1.2rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin: 0 0 0.8rem;
+  }
+  .wardham-details__nut-list { margin: 0; }
+  .wardham-details__nut-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2rem;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid rgba(15, 81, 50, 0.12);
+  }
+  .wardham-details__nut-label { font-size: 1.5rem; margin: 0; }
+  .wardham-details__nut-value {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 500;
+    font-size: 2.2rem;
+    margin: 0;
+  }
+  .wardham-details__nut-notes {
+    background: rgba(15, 81, 50, 0.06);
+    padding: 4.8rem;
+  }
+  .wardham-details__notes-heading {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    margin: 0 0 2.4rem;
+  }
+  .wardham-details__notes-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+  .wardham-details__note {
+    display: flex;
+    gap: 1.6rem;
+    align-items: flex-start;
+  }
+  .wardham-details__note-icon {
+    width: 3.2rem;
+    height: 3.2rem;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+  .wardham-details__note-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.4rem;
+  }
+  .wardham-details__note-desc {
+    font-size: 1.3rem;
+    line-height: 1.55;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  /* --- Ingredients --- */
+  .wardham-details__ing-intro {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    max-width: 56rem;
+    opacity: 0.9;
+    margin: 0 0 4.4rem;
+  }
+  .wardham-details__ing-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), 1fr);
+    gap: 1px;
+    background: rgba(15, 81, 50, 0.12);
+    border: 1px solid rgba(15, 81, 50, 0.12);
+  }
+  .wardham-details__ing {
+    background: var(--wd-ing-bg, #fff);
+    padding: 3.6rem 3.2rem;
+  }
+  .wardham-details__ing-pct {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 400;
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+  }
+  .wardham-details__ing-name {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .wardham-details__ing-note {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    opacity: 0.65;
+  }
+
+  @media (max-width: 990px) {
+    .wardham-details__desc-grid,
+    .wardham-details__nut-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .wardham-details__ing-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .wardham-details__nut-notes { padding: 3.6rem; }
+  }
+  @media (max-width: 749px) {
+    .wardham-details__tablist { gap: 2.4rem; overflow-x: auto; }
+    .wardham-details__tab { font-size: 1.4rem; }
+    .wardham-details__subheading { font-size: 2.8rem; }
+    .wardham-details__ing-grid { grid-template-columns: 1fr !important; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Wardham Product Details",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "— The detail"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything about this pouch."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "header",
+      "content": "Tab labels"
+    },
+    {
+      "type": "text",
+      "id": "tab_description_label",
+      "label": "Tab 1 label",
+      "default": "Description"
+    },
+    {
+      "type": "text",
+      "id": "tab_nutrition_label",
+      "label": "Tab 2 label",
+      "default": "Nutrition"
+    },
+    {
+      "type": "text",
+      "id": "tab_ingredients_label",
+      "label": "Tab 3 label",
+      "default": "Ingredients"
+    },
+    {
+      "type": "header",
+      "content": "Description tab"
+    },
+    {
+      "type": "text",
+      "id": "description_heading",
+      "label": "Sub-heading",
+      "default": "Small batches, honest flavour."
+    },
+    {
+      "type": "richtext",
+      "id": "description_body",
+      "label": "Body copy",
+      "default": "<p>Grade-A Suta makhana is roasted low and slow, then finished with a light dusting of single-origin spices — built for people who like their snacks with a little courage.</p><p>Every pouch is nitrogen-flushed to lock in the crunch, then sealed the same day it's roasted. No frying, no palm oil, no shortcuts — just fox nuts, cold-pressed oil and honest spices.</p>"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add 'Specification row' blocks to fill the list beside the description."
+    },
+    {
+      "type": "header",
+      "content": "Nutrition tab"
+    },
+    {
+      "type": "text",
+      "id": "serving_note",
+      "label": "Serving note",
+      "default": "Per 30g serving"
+    },
+    {
+      "type": "text",
+      "id": "nutrition_heading",
+      "label": "Sub-heading",
+      "default": "Nutrition facts"
+    },
+    {
+      "type": "text",
+      "id": "notes_heading",
+      "label": "Highlights heading",
+      "default": "Why it works"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add 'Nutrition row' blocks for the facts list and 'Nutrition highlight' blocks for the side panel."
+    },
+    {
+      "type": "header",
+      "content": "Ingredients tab"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_heading",
+      "label": "Sub-heading",
+      "default": "What's inside."
+    },
+    {
+      "type": "text",
+      "id": "ingredients_intro",
+      "label": "Intro line",
+      "default": "A short list you can pronounce. Nothing hidden, nothing artificial."
+    },
+    {
+      "type": "range",
+      "id": "ingredient_columns",
+      "label": "Ingredient columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-6"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 120
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Specification row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Net weight"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "75g"
+        }
+      ]
+    },
+    {
+      "type": "nutrition",
+      "name": "Nutrition row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Protein"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "9 g"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "name": "Nutrition highlight",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Complete protein"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "All nine essential amino acids in a plant-based crunch."
+        }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "percent",
+          "label": "Percentage",
+          "default": "96%"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Roasted makhana"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note",
+          "default": "Grade-A Suta fox nuts from Bihar wetlands"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wardham Product Details",
+      "blocks": [
+        { "type": "spec", "settings": { "label": "Net weight", "value": "75g" } },
+        { "type": "spec", "settings": { "label": "Roast", "value": "Small batch, slow" } },
+        { "type": "spec", "settings": { "label": "Shelf life", "value": "6 months" } },
+        { "type": "spec", "settings": { "label": "Origin", "value": "Bihar, India" } },
+        { "type": "spec", "settings": { "label": "Diet", "value": "Vegetarian · Gluten-free" } },
+        { "type": "nutrition", "settings": { "label": "Energy", "value": "118 kcal" } },
+        { "type": "nutrition", "settings": { "label": "Protein", "value": "9 g" } },
+        { "type": "nutrition", "settings": { "label": "Carbohydrates", "value": "14 g" } },
+        { "type": "nutrition", "settings": { "label": "Total fat", "value": "2.1 g" } },
+        { "type": "nutrition", "settings": { "label": "Dietary fibre", "value": "3.4 g" } },
+        { "type": "nutrition", "settings": { "label": "Calcium", "value": "58 mg" } },
+        { "type": "note", "settings": { "title": "Complete protein", "text": "All nine essential amino acids in a plant-based crunch." } },
+        { "type": "note", "settings": { "title": "Light on calories", "text": "Under 120 kcal a serving, so the 4pm snack stays honest." } },
+        { "type": "note", "settings": { "title": "Keeps you full", "text": "Fibre that supports digestion and long-lasting satiety." } },
+        { "type": "ingredient", "settings": { "percent": "96%", "name": "Roasted makhana", "note": "Grade-A Suta fox nuts from Bihar wetlands" } },
+        { "type": "ingredient", "settings": { "percent": "2%", "name": "Cold-pressed sunflower oil", "note": "A light coat, never deep-fried" } },
+        { "type": "ingredient", "settings": { "percent": "1%", "name": "Peri peri blend", "note": "African chilli, smoked paprika, garlic" } },
+        { "type": "ingredient", "settings": { "percent": "<1%", "name": "Rock salt", "note": "Unrefined Himalayan pink salt" } },
+        { "type": "ingredient", "settings": { "percent": "<1%", "name": "Dried lime", "note": "Sun-dried, stone-ground" } },
+        { "type": "ingredient", "settings": { "percent": "0%", "name": "Preservatives", "note": "None. Nitrogen-flushed for freshness" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,249 @@
+<div
+  class="wardham-beginning color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding isolate"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="wardham-beginning__layout {% if section.settings.heading_position == 'right' %}wardham-beginning__layout--reverse{% endif %}">
+
+      <div class="wardham-beginning__aside">
+        <div class="wardham-beginning__sticky">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="wardham-beginning__eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="wardham-beginning__heading {{ section.settings.heading_size }}">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="wardham-beginning__body">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'paragraph' -%}
+              <div class="wardham-beginning__para rte" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </div>
+            {%- when 'link' -%}
+              <a href="{{ block.settings.link_url | default: '#' }}" class="wardham-beginning__link" {{ block.shopify_attributes }}>
+                {{ block.settings.link_label }} &rarr;
+              </a>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .wardham-beginning {
+    padding-top: var(--pt, 130px);
+    padding-bottom: var(--pb, 130px);
+  }
+
+  .wardham-beginning__layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 10rem;
+    align-items: start;
+  }
+  .wardham-beginning__layout--reverse { direction: rtl; }
+  .wardham-beginning__layout--reverse > * { direction: ltr; }
+
+  .wardham-beginning__sticky {
+    position: sticky;
+    top: 12rem;
+  }
+
+  .wardham-beginning__eyebrow {
+    font-size: 1.2rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 2.4rem;
+    opacity: 0.85;
+  }
+
+  .wardham-beginning__heading {
+    margin: 0;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .wardham-beginning__body {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    padding-top: 0.8rem;
+  }
+
+  .wardham-beginning__para {
+    font-size: 1.8rem;
+    line-height: 1.75;
+    font-weight: 300;
+    opacity: 0.92;
+  }
+  .wardham-beginning__para > p { margin: 0; }
+  .wardham-beginning__para > p + p { margin-top: 1.6rem; }
+  .wardham-beginning__para em {
+    font-family: var(--font-heading-family), serif;
+    font-style: italic;
+    font-weight: 400;
+    opacity: 1;
+  }
+
+  .wardham-beginning__link {
+    align-self: start;
+    font-size: 1.3rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: currentColor;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.4rem;
+    margin-top: 0.8rem;
+  }
+
+  @media (max-width: 990px) {
+    .wardham-beginning__layout {
+      grid-template-columns: 1fr;
+      gap: 3.6rem;
+    }
+    .wardham-beginning__sticky { position: static; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Wardham Beginning",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading (left column)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "— The beginning"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "It started in a Bihar wetland."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "label": "Heading position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-6"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "info": "Use italics for emphasis — they render in the serif heading font.",
+          "default": "<p>On a monsoon visit to Darbhanga, our founder watched farmers wade chest-deep to hand-harvest fox nuts — a crop that has fed this region for centuries, sold onward for pennies and rarely credited.</p>"
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Read our sourcing story"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Wardham Beginning",
+      "blocks": [
+        { "type": "paragraph" },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>The makhana that came home from that trip, simply roasted in a clay pan, was better than anything on a supermarket shelf. The question wrote itself: <em>why does the honest version never make it to the city?</em></p>"
+          }
+        },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Wardham is our answer — a direct line from those ponds to your pantry, with the farmers paid fairly and the makhana treated with the care it always deserved.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

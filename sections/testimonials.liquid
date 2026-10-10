@@ -1,0 +1,456 @@
+<div
+  class="wardham-testimonials color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding isolate"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="wardham-testimonials__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="wardham-testimonials__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="wardham-testimonials__heading {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="wardham-testimonials__nav">
+          <button
+            type="button"
+            class="wardham-testimonials__arrow"
+            data-dir="prev"
+            aria-label="Previous testimonial"
+          >&larr;</button>
+          <button
+            type="button"
+            class="wardham-testimonials__arrow wardham-testimonials__arrow--active"
+            data-dir="next"
+            aria-label="Next testimonial"
+          >&rarr;</button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <wardham-carousel
+        class="wardham-testimonials__carousel"
+        style="--cols: {{ section.settings.columns_desktop }};"
+      >
+        <ul class="wardham-testimonials__track" role="list" data-track>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <li class="wardham-testimonial color-{{ block.settings.card_color_scheme }} gradient" {{ block.shopify_attributes }}>
+                {%- assign rating = block.settings.rating | plus: 0 -%}
+                {%- if rating > 0 -%}
+                  <div class="wardham-testimonial__rating" aria-label="Rated {{ rating }} out of 5">
+                    {%- for i in (1..5) -%}
+                      {%- if i <= rating -%}
+                        <span class="wardham-testimonial__star wardham-testimonial__star--on" aria-hidden="true">&#9733;</span>
+                      {%- else -%}
+                        <span class="wardham-testimonial__star" aria-hidden="true">&#9733;</span>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.quote != blank -%}
+                  <blockquote class="wardham-testimonial__quote">
+                    {{ block.settings.quote }}
+                  </blockquote>
+                {%- endif -%}
+
+                <div class="wardham-testimonial__footer">
+                  <div class="wardham-testimonial__avatar" aria-hidden="true">
+                    {%- if block.settings.avatar != blank -%}
+                      {{
+                        block.settings.avatar
+                        | image_url: width: 120
+                        | image_tag: loading: 'lazy', width: 60, height: 60, alt: block.settings.name
+                      }}
+                    {%- elsif block.settings.name != blank -%}
+                      <span class="wardham-testimonial__initial">{{ block.settings.name | slice: 0 | upcase }}</span>
+                    {%- endif -%}
+                  </div>
+                  <div class="wardham-testimonial__meta">
+                    {%- if block.settings.name != blank -%}
+                      <p class="wardham-testimonial__name">{{ block.settings.name }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.location != blank -%}
+                      <p class="wardham-testimonial__location">{{ block.settings.location }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </wardham-carousel>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    if (customElements.get('wardham-carousel')) return;
+    customElements.define('wardham-carousel', class extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('[data-track]');
+        this.section = this.closest('.wardham-testimonials');
+        this.prevBtn = this.section.querySelector('[data-dir="prev"]');
+        this.nextBtn = this.section.querySelector('[data-dir="next"]');
+        if (!this.track || !this.prevBtn || !this.nextBtn) return;
+
+        this.prevBtn.addEventListener('click', () => this.scrollByCards(-1));
+        this.nextBtn.addEventListener('click', () => this.scrollByCards(1));
+        this.track.addEventListener('scroll', () => this.updateArrows(), { passive: true });
+        window.addEventListener('resize', () => this.updateArrows());
+        this.updateArrows();
+      }
+
+      step() {
+        const card = this.track.querySelector('li');
+        if (!card) return this.track.clientWidth;
+        const gap = parseFloat(getComputedStyle(this.track).columnGap || getComputedStyle(this.track).gap) || 0;
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      scrollByCards(dir) {
+        this.track.scrollBy({ left: this.step() * dir, behavior: 'smooth' });
+      }
+
+      updateArrows() {
+        const max = this.track.scrollWidth - this.track.clientWidth - 2;
+        const x = this.track.scrollLeft;
+        this.toggle(this.prevBtn, x > 2);
+        this.toggle(this.nextBtn, x < max);
+      }
+
+      toggle(btn, enabled) {
+        btn.classList.toggle('wardham-testimonials__arrow--active', enabled);
+        btn.disabled = !enabled;
+      }
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .wardham-testimonials {
+    padding-top: var(--pt, 96px);
+    padding-bottom: var(--pb, 140px);
+  }
+
+  .wardham-testimonials__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 4.5rem;
+    flex-wrap: wrap;
+  }
+
+  .wardham-testimonials__eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 1.6rem;
+    color: #0F5132;
+  }
+
+  .wardham-testimonials__heading {
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .wardham-testimonials__nav {
+    display: flex;
+    gap: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .wardham-testimonials__arrow {
+    width: 4.8rem;
+    height: 4.8rem;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: currentColor;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .wardham-testimonials__arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .wardham-testimonials__arrow:not(:disabled):hover {
+    background: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+  }
+
+  .wardham-testimonials__carousel {
+    display: block;
+  }
+
+  .wardham-testimonials__track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - (var(--cols, 3) - 1) * 2.8rem) / var(--cols, 3));
+    gap: 2.8rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .wardham-testimonials__track::-webkit-scrollbar { display: none; }
+
+  @media (max-width: 990px) {
+    .wardham-testimonials__track {
+      grid-auto-columns: calc((100% - 2.8rem) / 2);
+    }
+  }
+  @media (max-width: 640px) {
+    .wardham-testimonials__track {
+      grid-auto-columns: 88%;
+    }
+  }
+
+  .wardham-testimonial {
+    scroll-snap-align: start;
+    padding: 4.4rem;
+    border: 1px solid rgba(15, 81, 50, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+    list-style: none;
+  }
+
+  .wardham-testimonial__rating {
+    display: flex;
+    gap: 3px;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+  }
+  .wardham-testimonial__star { color: rgba(15, 81, 50, 0.2); }
+  .wardham-testimonial__star--on { color: #0F5132; }
+
+  .wardham-testimonial__quote {
+    margin: 0;
+    font-family: var(--font-heading-family), serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2.2rem;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .wardham-testimonial__footer {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(15, 81, 50, 0.12);
+  }
+
+  .wardham-testimonial__avatar {
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(15, 81, 50, 0.08);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wardham-testimonial__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .wardham-testimonial__initial {
+    font-family: var(--font-heading-family), serif;
+    font-size: 1.8rem;
+    color: currentColor;
+  }
+
+  .wardham-testimonial__meta { display: flex; flex-direction: column; }
+
+  .wardham-testimonial__name {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+  .wardham-testimonial__location {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "— Kind Words"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From our pantry to theirs."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" },
+        { "value": "h2", "label": "Medium" }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Cards visible on desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-6"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating (stars)",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Testimonial text",
+          "default": "<p>The Peri Peri is dangerously good. I keep a pouch on my desk and one in the car. Zero guilt.</p>"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Ananya Sharma"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Mumbai"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer avatar",
+          "info": "Optional. Square image works best."
+        },
+        {
+          "type": "color_scheme",
+          "id": "card_color_scheme",
+          "label": "Card color scheme",
+          "default": "scheme-9"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Testimonials Carousel",
+      "blocks": [
+        { "type": "testimonial" },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Finally an Indian snack brand that treats packaging like a design object. And the makhana itself is exceptional.</p>",
+            "name": "Rohan Verma",
+            "location": "Bengaluru"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Replaced our office biscuit jar with three Wardham tins. Team is happier, meetings feel calmer, honestly.</p>",
+            "name": "Priya Nair",
+            "location": "Delhi"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

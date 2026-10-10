@@ -1,0 +1,229 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "product_details_dtRMEn": {
+      "type": "product-details",
+      "blocks": {
+        "spec_YmKghV": {
+          "type": "spec",
+          "settings": {
+            "label": "Net weight",
+            "value": "75g"
+          }
+        },
+        "spec_4ELFtp": {
+          "type": "spec",
+          "settings": {
+            "label": "Roast",
+            "value": "Small batch, slow"
+          }
+        },
+        "spec_Aa38LX": {
+          "type": "spec",
+          "settings": {
+            "label": "Shelf life",
+            "value": "6 months"
+          }
+        },
+        "spec_m3qdDA": {
+          "type": "spec",
+          "settings": {
+            "label": "Origin",
+            "value": "Bihar, India"
+          }
+        },
+        "spec_TaGWHC": {
+          "type": "spec",
+          "settings": {
+            "label": "Diet",
+            "value": "Vegetarian · Gluten-free"
+          }
+        },
+        "nutrition_efXrdV": {
+          "type": "nutrition",
+          "settings": {
+            "label": "Energy",
+            "value": "118 kcal"
+          }
+        },
+        "nutrition_aJqbx8": {
+          "type": "nutrition",
+          "settings": {
+            "label": "Protein",
+            "value": "9 g"
+          }
+        },
+        "nutrition_eFVr4L": {
+          "type": "nutrition",
+          "settings": {
+            "label": "Carbohydrates",
+            "value": "14 g"
+          }
+        },
+        "nutrition_3zzXrd": {
+          "type": "nutrition",
+          "settings": {
+            "label": "Total fat",
+            "value": "2.1 g"
+          }
+        },
+        "nutrition_KVE8dH": {
+          "type": "nutrition",
+          "settings": {
+            "label": "Dietary fibre",
+            "value": "3.4 g"
+          }
+        },
+        "nutrition_TdGGMk": {
+          "type": "nutrition",
+          "settings": {
+            "label": "Calcium",
+            "value": "58 mg"
+          }
+        },
+        "note_WjzzEB": {
+          "type": "note",
+          "settings": {
+            "title": "Complete protein",
+            "text": "All nine essential amino acids in a plant-based crunch."
+          }
+        },
+        "note_QLWndN": {
+          "type": "note",
+          "settings": {
+            "title": "Light on calories",
+            "text": "Under 120 kcal a serving, so the 4pm snack stays honest."
+          }
+        },
+        "note_bwKrTf": {
+          "type": "note",
+          "settings": {
+            "title": "Keeps you full",
+            "text": "Fibre that supports digestion and long-lasting satiety."
+          }
+        },
+        "ingredient_cXG6Yp": {
+          "type": "ingredient",
+          "settings": {
+            "percent": "96%",
+            "name": "Roasted makhana",
+            "note": "Grade-A Suta fox nuts from Bihar wetlands"
+          }
+        },
+        "ingredient_3tBNfw": {
+          "type": "ingredient",
+          "settings": {
+            "percent": "2%",
+            "name": "Cold-pressed sunflower oil",
+            "note": "A light coat, never deep-fried"
+          }
+        },
+        "ingredient_kwHJja": {
+          "type": "ingredient",
+          "settings": {
+            "percent": "1%",
+            "name": "Peri peri blend",
+            "note": "African chilli, smoked paprika, garlic"
+          }
+        },
+        "ingredient_N97eHm": {
+          "type": "ingredient",
+          "settings": {
+            "percent": "<1%",
+            "name": "Rock salt",
+            "note": "Unrefined Himalayan pink salt"
+          }
+        },
+        "ingredient_raVzzn": {
+          "type": "ingredient",
+          "settings": {
+            "percent": "<1%",
+            "name": "Dried lime",
+            "note": "Sun-dried, stone-ground"
+          }
+        },
+        "ingredient_DEQVkw": {
+          "type": "ingredient",
+          "settings": {
+            "percent": "0%",
+            "name": "Preservatives",
+            "note": "None. Nitrogen-flushed for freshness"
+          }
+        }
+      },
+      "block_order": [
+        "spec_YmKghV",
+        "spec_4ELFtp",
+        "spec_Aa38LX",
+        "spec_m3qdDA",
+        "spec_TaGWHC",
+        "nutrition_efXrdV",
+        "nutrition_aJqbx8",
+        "nutrition_eFVr4L",
+        "nutrition_3zzXrd",
+        "nutrition_KVE8dH",
+        "nutrition_TdGGMk",
+        "note_WjzzEB",
+        "note_QLWndN",
+        "note_bwKrTf",
+        "ingredient_cXG6Yp",
+        "ingredient_3tBNfw",
+        "ingredient_kwHJja",
+        "ingredient_N97eHm",
+        "ingredient_raVzzn",
+        "ingredient_DEQVkw"
+      ],
+      "disabled": true,
+      "name": "Wardham Product Details",
+      "settings": {
+        "eyebrow": "— The detail",
+        "heading": "Everything about this pouch.",
+        "heading_size": "h1",
+        "tab_description_label": "Description",
+        "tab_nutrition_label": "Nutrition",
+        "tab_ingredients_label": "Ingredients",
+        "description_heading": "Small batches, honest flavour.",
+        "description_body": "<p>Grade-A Suta makhana is roasted low and slow, then finished with a light dusting of single-origin spices — built for people who like their snacks with a little courage.</p><p>Every pouch is nitrogen-flushed to lock in the crunch, then sealed the same day it's roasted. No frying, no palm oil, no shortcuts — just fox nuts, cold-pressed oil and honest spices.</p>",
+        "serving_note": "Per 30g serving",
+        "nutrition_heading": "Nutrition facts",
+        "notes_heading": "Why it works",
+        "ingredients_heading": "What's inside.",
+        "ingredients_intro": "A short list you can pronounce. Nothing hidden, nothing artificial.",
+        "ingredient_columns": 3,
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form",
+    "product_details_dtRMEn"
+  ]
+}

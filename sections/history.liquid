@@ -1,0 +1,244 @@
+<div
+  class="wardham-history color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding isolate"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width wardham-history__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="wardham-history__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="wardham-history__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="wardham-history__heading {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="wardham-history__list" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'milestone' -%}
+            <li class="wardham-history__row" {{ block.shopify_attributes }}>
+              <div class="wardham-history__year serif">{{ block.settings.year }}</div>
+              <div class="wardham-history__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="wardham-history__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="wardham-history__text rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .wardham-history {
+    padding-top: var(--pt, 140px);
+    padding-bottom: var(--pb, 140px);
+  }
+
+  .wardham-history__head {
+    text-align: center;
+    margin-bottom: 7rem;
+  }
+  .wardham-history__eyebrow {
+    font-size: 1.2rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 1.8rem;
+    opacity: 0.85;
+  }
+  .wardham-history__heading {
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .wardham-history__list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 96rem;
+  }
+
+  .wardham-history__row {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    gap: 6rem;
+    padding: 4rem 0;
+    border-top: 1px solid rgba(15, 81, 50, 0.18);
+    align-items: baseline;
+  }
+
+  .wardham-history__year {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 400;
+    font-size: 4.4rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .wardham-history__title {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 500;
+    font-size: 2.6rem;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .wardham-history__text {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    max-width: 62rem;
+    opacity: 0.85;
+  }
+  .wardham-history__text > p { margin: 0; }
+  .wardham-history__text > p + p { margin-top: 1rem; }
+
+  @media (max-width: 749px) {
+    .wardham-history__head { margin-bottom: 5rem; }
+    .wardham-history__row {
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+      padding: 3rem 0;
+    }
+    .wardham-history__year { font-size: 3.6rem; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Wardham History",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "— How we got here"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A short history."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-7"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2021"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "A monsoon visit"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>A trip to Darbhanga turns a family snack into an obsession. The first pan-roasted batches are shared with friends in Mumbai.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "History",
+      "blocks": [
+        { "type": "milestone" },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2022",
+            "title": "The first partnership",
+            "text": "<p>We sign our earliest direct agreements with 40 farming families in the Mithila belt, cutting out the auction floor entirely.</p>"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "title": "Wardham is born",
+            "text": "<p>Four flavours launch online. The name — from a word for a gift given with respect — becomes the promise on every pouch.</p>"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2026",
+            "title": "A wider table",
+            "text": "<p>Now working with 200+ families and funding village-level cold storage, we roast more mindfully than ever, and grow slowly on purpose.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

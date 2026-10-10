@@ -1,0 +1,309 @@
+<div
+  class="wardham-faq color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding isolate"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="wardham-faq__layout {% if section.settings.heading_position == 'right' %}wardham-faq__layout--reverse{% endif %}">
+
+      <div class="wardham-faq__aside">
+        <div class="wardham-faq__sticky">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="wardham-faq__eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="wardham-faq__heading {{ section.settings.heading_size }}">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="wardham-faq__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'question' -%}
+            <details
+              class="wardham-faq__item"
+              {% if forloop.first and section.settings.open_first %}open{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <summary class="wardham-faq__summary">
+                <span class="wardham-faq__q">{{ block.settings.question }}</span>
+                <span class="wardham-faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="wardham-faq__answer rte">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .wardham-faq {
+    padding-top: var(--pt, 140px);
+    padding-bottom: var(--pb, 140px);
+  }
+
+  .wardham-faq__layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 8rem;
+    align-items: start;
+    max-width: 110rem;
+    margin: 0 auto;
+  }
+  .wardham-faq__layout--reverse { direction: rtl; }
+  .wardham-faq__layout--reverse > * { direction: ltr; }
+
+  .wardham-faq__sticky {
+    position: sticky;
+    top: 12rem;
+  }
+  .wardham-faq__eyebrow {
+    font-size: 1.2rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0 0 2.4rem;
+    opacity: 0.85;
+  }
+  .wardham-faq__heading {
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .wardham-faq__item {
+    border-top: 1px solid rgba(15, 81, 50, 0.18);
+  }
+  .wardham-faq__item:last-child {
+    border-bottom: 1px solid rgba(15, 81, 50, 0.18);
+  }
+
+  .wardham-faq__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 3.2rem 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 3.2rem;
+  }
+  .wardham-faq__summary::-webkit-details-marker { display: none; }
+
+  .wardham-faq__q {
+    font-family: var(--font-heading-family), serif;
+    font-weight: 500;
+    font-size: 2.6rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .wardham-faq__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    margin-top: 0.6rem;
+  }
+  .wardham-faq__icon::before,
+  .wardham-faq__icon::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .wardham-faq__icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    transform: translateY(-50%);
+  }
+  .wardham-faq__icon::after {
+    left: 50%;
+    top: 0;
+    width: 1.5px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+  .wardham-faq__item[open] .wardham-faq__icon::after {
+    opacity: 0;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .wardham-faq__answer {
+    font-size: 1.6rem;
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 58rem;
+    padding: 0 0 3.2rem;
+    opacity: 0.9;
+  }
+  .wardham-faq__answer > p { margin: 0; }
+  .wardham-faq__answer > p + p { margin-top: 1.4rem; }
+
+  @media (max-width: 990px) {
+    .wardham-faq__layout {
+      grid-template-columns: 1fr;
+      gap: 3.6rem;
+    }
+    .wardham-faq__sticky { position: static; }
+  }
+  @media (max-width: 749px) {
+    .wardham-faq__q { font-size: 2.2rem; }
+    .wardham-faq__summary { padding: 2.6rem 0; gap: 2rem; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Wardham FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "— Good to know"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Questions, answered."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "label": "Heading position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first question by default",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-6"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What exactly is makhana?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Makhana — also called fox nuts or lotus seeds — are the popped seeds of the water lily, grown in the wetland ponds of Bihar. Naturally high in protein and low in fat, they have been an everyday snack across India for centuries.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Wardham FAQ",
+      "blocks": [
+        { "type": "question" },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are Wardham makhana roasted or fried?",
+            "answer": "<p>Always roasted, never fried. We slow-roast in small batches with a touch of cold-pressed oil, which keeps the crunch light and preserves the natural nutrition.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is in each pack besides makhana?",
+            "answer": "<p>Only real ingredients you can pronounce — sea salt, single-origin spices, and cold-pressed oils. No preservatives, no palm oil, no artificial colours or flavour enhancers.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Where do you source your makhana?",
+            "answer": "<p>Directly from 200+ farming families across Bihar\u2019s Mithila belt, at prices agreed before the season. No middlemen, no auction floors — so the growers are the ones who gain.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How should I store an opened pack?",
+            "answer": "<p>Reseal the pouch or move the makhana to an airtight jar and keep it somewhere cool and dry. Best enjoyed within two weeks of opening for peak crunch.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship across India?",
+            "answer": "<p>Yes — we ship pan-India, with free delivery on orders above \u20B9599. Most orders arrive within 3\u20135 working days.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
