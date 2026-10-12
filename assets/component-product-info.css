@@ -1,9 +1,11 @@
-/* Product page right column: title, price meta, highlights, information accordion. */
+/* Product page right column: title, price meta, quantity, buy buttons, share icons, details (plus optional highlights and information accordion blocks). */
 
 /* Title */
 .product__info-container .product__title h1 {
   font-size: 2.6rem;
   line-height: 1.15;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
 }
 
 @media screen and (min-width: 990px) {
@@ -226,4 +228,90 @@
 .product-nutrition__sub th {
   padding-left: 1.6rem;
   color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Quantity: label left, stepper right, hairline above */
+.product__info-container .product-form__quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+  padding-top: 2.4rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
+}
+
+.product__info-container .product-form__quantity .quantity__label {
+  margin: 0;
+  font-weight: 700;
+}
+
+.product__info-container .product-form__quantity .quantity__label > span:first-child::after {
+  content: ' :';
+}
+
+/* Buy buttons side by side: solid add to cart, soft buy it now */
+.product__info-container .product-form__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  max-width: none;
+}
+
+.product__info-container .product-form__submit {
+  margin-bottom: 0;
+}
+
+.product__info-container .shopify-payment-button__button--unbranded,
+.product__info-container .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: rgba(var(--color-button), 0.08);
+  color: rgb(var(--color-button));
+}
+
+.product__info-container .shopify-payment-button__button--unbranded::after {
+  box-shadow: none;
+}
+
+/* Share icons */
+.share-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 2.4rem 0 0;
+}
+
+.share-icons__link {
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: var(--buttons-radius);
+  background-color: rgba(var(--color-foreground), 0.06);
+  color: rgb(var(--color-foreground));
+  transition: background-color 0.2s ease;
+}
+
+.share-icons__link:hover {
+  background-color: rgba(var(--color-foreground), 0.12);
+}
+
+.share-icons__icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Product details: benefit lines and facts */
+.product__info-container .product-details {
+  margin-top: 3.2rem;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.product-details p {
+  margin: 0 0 1.2rem;
+}
+
+.product-details strong {
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
 }

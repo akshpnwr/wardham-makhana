@@ -1,0 +1,58 @@
+{%- doc -%}
+  Renders the product details text: benefit lines, then short facts
+  (country of origin, MRP, shelf life).
+
+  Benefits come from the product's custom.benefits metafield when set, one per
+  line as "Lead | Text" (shown as a bold lead and a dash). Otherwise the block's
+  shared benefits rich text is used.
+
+  @param {object} product - The product.
+  @param {object} block - The product_details block.
+
+  @example
+  {% render 'product-details', product: product, block: block %}
+{%- enddoc -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign benefits = product.metafields.custom.benefits.value
+  assign shelf_life = product.metafields.custom.shelf_life.value
+
+  assign mrp = variant.price
+  if variant.compare_at_price > variant.price
+    assign mrp = variant.compare_at_price
+  endif
+
+  assign pack_size = ''
+  if variant.unit_price_measurement
+    assign pack_size = variant.unit_price_measurement.quantity_value | append: ' ' | append: variant.unit_price_measurement.quantity_unit
+  endif
+-%}
+<div class="product-details rte" {{ block.shopify_attributes }}>
+  {%- if benefits != blank -%}
+    {%- assign lines = benefits | newline_to_br | split: '<br />' -%}
+    {%- for raw_line in lines -%}
+      {%- assign line = raw_line | strip -%}
+      {%- if line == blank -%}{%- continue -%}{%- endif -%}
+      {%- if line contains '|' -%}
+        {%- assign lead = line | split: '|' | first | strip -%}
+        {%- assign text = line | remove_first: lead | remove_first: '|' | strip -%}
+        <p><strong>{{ lead | escape }}</strong> – {{ text | escape }}</p>
+      {%- else -%}
+        <p>{{ line | escape }}</p>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {{ block.settings.benefits }}
+  {%- endif -%}
+
+  {%- if block.settings.country_of_origin != blank -%}
+    <p>Country of origin: {{ block.settings.country_of_origin | escape }}</p>
+  {%- endif -%}
+  <p>
+    MRP (incl. of taxes): {{ mrp | money }}
+    {%- if pack_size != blank %} per pack ({{ pack_size }}){% endif -%}
+  </p>
+  {%- if shelf_life != blank -%}
+    <p>Shelf life: {{ shelf_life | escape }}</p>
+  {%- endif -%}
+</div>

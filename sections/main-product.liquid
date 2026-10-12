@@ -13,6 +13,12 @@
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-product-info.css' | asset_url | stylesheet_tag }}
+  {%- assign heading_font_semibold = settings.type_header_font | font_modify: 'weight', '600' -%}
+  {%- if heading_font_semibold -%}
+    {% style %}
+      {{ heading_font_semibold | font_face: font_display: 'swap' }}
+    {% endstyle %}
+  {%- endif -%}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
@@ -222,6 +228,10 @@
                   {%- render 'product-highlights', product: product, block: block -%}
                 {%- when 'info_accordion' -%}
                   {%- render 'product-info-accordion', product: product, block: block, section: section -%}
+                {%- when 'product_details' -%}
+                  {%- render 'product-details', product: product, block: block -%}
+                {%- when 'share_icons' -%}
+                  {%- render 'share-icons', product: product, block: block -%}
                 {%- when 'sku' -%}
                   <p
                     class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -1027,6 +1037,40 @@
           "id": "manufacturer",
           "label": "Manufacturer details",
           "info": "Shared by all products. A product's custom.manufacturer_override metafield replaces it."
+        }
+      ]
+    },
+    {
+      "type": "product_details",
+      "name": "Product details",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "benefits",
+          "label": "Benefits",
+          "info": "Shared by all products. Bold the lead phrase of each line. A product's custom.benefits metafield (one \"Lead | Text\" per line) replaces it."
+        },
+        {
+          "type": "text",
+          "id": "country_of_origin",
+          "label": "Country of origin",
+          "default": "India"
+        },
+        {
+          "type": "paragraph",
+          "content": "MRP is the variant's compare-at price (or price) with its unit price pack size. Shelf life reads the custom.shelf_life metafield."
+        }
+      ]
+    },
+    {
+      "type": "share_icons",
+      "name": "Share icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Facebook, X, Pinterest, Telegram, WhatsApp and email share links."
         }
       ]
     },

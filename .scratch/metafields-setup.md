@@ -49,3 +49,17 @@ Import these the same way (overwrite matching handles):
 ## 6. Later
 
 - Fill pet jar metafields (and highlights for raw makhana).
+
+## 7. Farmley-style layout (theme "PDP Farmley layout - preview")
+
+The product page no longer uses the highlights grid or the accordion. The text under the buttons is:
+- **Benefits**: shared copy in Customize → Default product → Product details block (draft, needs client approval). A product can replace it with its own lines.
+- Country of origin (block setting), MRP (compare-at price + pack size from unit price), shelf life (`custom.shelf_life`).
+
+Per-product benefits (each flavour reads differently, raw makhana has its own set):
+1. Add a definition: **Benefits**, `custom.benefits`, Multi-line text. One line per benefit as `Lead | Text`.
+2. Import `.scratch/product-benefits.csv` (all 22 products, overwrite matching handles).
+
+Each flavour gets two flavour-specific lines plus two shared ones; the same flavour reads the same across canister, standie and pet jar. The shared block copy is only a fallback for products without the metafield. Mexican Masala and Achari Masti copy is written from the flavour name only (no ingredient list on file), so check it against the packs.
+
+Ingredients, allergens, nutrition and manufacturer details are no longer shown as text. They stay in the metafields, so the accordion block can be added back from the theme editor at any time.
