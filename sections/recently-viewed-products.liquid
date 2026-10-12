@@ -1,0 +1,180 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-row.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-tile-row.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="recently-viewed-products color-{{ section.settings.color_scheme }} gradient"
+  {% unless request.design_mode %}
+    hidden
+  {% endunless %}
+>
+  <div class="{% if section.settings.full_width %}product-tile-row-wrapper--full{% else %}page-width{% endif %} section-{{ section.id }}-padding isolate">
+    <h2 class="product-tile-row__heading inline-richtext {{ section.settings.heading_size }}">
+      {{ section.settings.heading }}
+    </h2>
+    <recently-viewed-products
+      data-product-handle="{{ product.handle }}"
+      data-limit="{{ section.settings.products_to_show }}"
+      {% if request.design_mode %}
+        data-design-mode
+      {% endif %}
+    >
+      <product-tile-row
+        class="product-tile-row"
+        style="--tile-columns-desktop: {{ section.settings.columns_desktop }}; --tile-columns-mobile: {{ section.settings.columns_mobile }};"
+      >
+        {% render 'product-tile-row-nav' %}
+        <ul class="product-tile-row__list" role="list">
+          {%- if request.design_mode -%}
+            <li class="product-tile-row__item">
+              <p>Products a shopper has viewed appear here. This section stays hidden until they have viewed at least one other product.</p>
+            </li>
+          {%- endif -%}
+        </ul>
+      </product-tile-row>
+    </recently-viewed-products>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Recently viewed products",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the products this shopper viewed before, stored in their browser. The current product is left out."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Recently viewed products",
+      "label": "t:sections.related-products.settings.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "t:sections.related-products.settings.products_to_show.label"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 5,
+      "label": "t:sections.related-products.settings.columns_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "t:sections.related-products.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.related-products.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.related-products.settings.columns_mobile.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recently viewed products"
+    }
+  ]
+}
+{% endschema %}

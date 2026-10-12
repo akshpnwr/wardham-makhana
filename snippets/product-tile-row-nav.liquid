@@ -1,0 +1,12 @@
+{% comment %}
+  Renders the previous/next buttons of a product-tile-row (desktop only).
+
+  Usage:
+  {% render 'product-tile-row-nav' %}
+{% endcomment %}
+<button type="button" class="product-tile-row__nav product-tile-row__nav--prev" aria-label="{{ 'general.slider.previous_slide' | t }}" disabled>
+  <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+</button>
+<button type="button" class="product-tile-row__nav product-tile-row__nav--next" aria-label="{{ 'general.slider.next_slide' | t }}">
+  <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+</button>

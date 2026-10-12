@@ -1,0 +1,113 @@
+/* Horizontal row of product tiles */
+.product-tile-row-wrapper--full {
+  padding-inline: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .product-tile-row-wrapper--full {
+    padding-inline: 3.2rem;
+  }
+}
+
+.product-tile-row {
+  --tile-gap: 1.2rem;
+  --tile-columns: var(--tile-columns-mobile, 2);
+  display: block;
+  position: relative;
+}
+
+.product-tile-row__heading {
+  margin: 0 0 2rem;
+}
+
+.product-tile-row__list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--tile-gap) * (var(--tile-columns) - 1)) / var(--tile-columns) - 2rem);
+  gap: var(--tile-gap);
+  margin: 0;
+  padding: 0 0 0.4rem;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.product-tile-row__list::-webkit-scrollbar {
+  display: none;
+}
+
+.product-tile-row__item {
+  scroll-snap-align: start;
+  min-width: 0;
+  display: flex;
+}
+
+@media screen and (min-width: 750px) {
+  .product-tile-row {
+    --tile-gap: 1.6rem;
+    --tile-columns: var(--tile-columns-desktop, 4);
+  }
+
+  .product-tile-row__list {
+    grid-auto-columns: calc((100% - var(--tile-gap) * (var(--tile-columns) - 1)) / var(--tile-columns));
+  }
+}
+
+.product-tile-row__nav {
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .product-tile-row--scrollable .product-tile-row__nav {
+    position: absolute;
+    top: calc(var(--tile-nav-top, 40%));
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    box-shadow: 0 0.2rem 0.8rem rgba(var(--color-shadow), 0.18);
+    cursor: pointer;
+    transition: opacity var(--duration-short) ease;
+  }
+
+  .product-tile-row__nav[disabled] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .product-tile-row__nav--prev {
+    left: -2.2rem;
+  }
+
+  .product-tile-row__nav--next {
+    right: -2.2rem;
+  }
+
+  .product-tile-row__nav .svg-wrapper {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .product-tile-row__nav--prev .svg-wrapper {
+    transform: rotate(90deg);
+  }
+
+  .product-tile-row__nav--next .svg-wrapper {
+    transform: rotate(-90deg);
+  }
+}
+
+.product-tile-row__item > product-component {
+  display: block;
+  width: 100%;
+}

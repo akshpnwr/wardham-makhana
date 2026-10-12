@@ -90,25 +90,39 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "You might also like",
         "heading_size": "h2",
-        "products_to_show": 4,
+        "products_to_show": 10,
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
+        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
         "show_vendor": false,
-        "show_rating": false,
         "padding_top": 36,
-        "padding_bottom": 28
+        "padding_bottom": 12,
+        "full_width": false
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "heading": "Recently viewed products",
+        "heading_size": "h2",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
+        "padding_top": 24,
+        "padding_bottom": 36,
+        "full_width": false
       }
     }
   },
   "order": [
     "main",
     "disclosures",
-    "related-products"
+    "related-products",
+    "recently-viewed"
   ]
 }

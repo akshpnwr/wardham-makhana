@@ -1,0 +1,22 @@
+{% comment %}
+  Renders one product card for the current product, using the same card settings as the
+  collection page. Not placed in any template: recently-viewed-products fetches it with
+  /products/<handle>?section_id=product-tile.
+{% endcomment %}
+{%- if product -%}
+  {% render 'card-product',
+    card_product: product,
+    media_aspect_ratio: 'adapt',
+    skip_styles: true,
+    section_id: section.id,
+    product_view_context: 'recently-viewed'
+  %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product tile",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

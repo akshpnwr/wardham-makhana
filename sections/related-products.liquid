@@ -1,10 +1,8 @@
+{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
-
-{% if section.settings.image_shape == 'blob' %}
-  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
-{%- endif -%}
+{{ 'component-product-row.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-tile-row.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -22,41 +20,58 @@
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <product-recommendations
-    class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    class="related-products {% if section.settings.full_width %}product-tile-row-wrapper--full{% else %}page-width{% endif %} section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
   >
-    {% if recommendations.performed and recommendations.products_count > 0 %}
-      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
+    {%- liquid
+      # Shopify's recommendations load after the page, in place of this markup. Until then
+      # (and whenever they come back empty, as on a new store) show the fallback collection.
+      if recommendations.performed
+        assign tile_products = recommendations.products
+      else
+        assign fallback_collection = section.settings.fallback_collection | default: product.collections.first | default: collections.all
+        assign tile_products = fallback_collection.products
+      endif
+    -%}
+    {%- capture tiles -%}
+      {%- assign tile_count = 0 -%}
+      {%- assign skip_card_product_styles = false -%}
+      {%- for tile_product in tile_products -%}
+        {%- if tile_product.id == product.id -%}{%- continue -%}{%- endif -%}
+        {%- if tile_count >= section.settings.products_to_show -%}{%- break -%}{%- endif -%}
+        {%- assign tile_count = tile_count | plus: 1 -%}
+        <li class="product-tile-row__item">
+          {% render 'card-product',
+            card_product: tile_product,
+            media_aspect_ratio: section.settings.image_ratio,
+            show_secondary_image: section.settings.show_secondary_image,
+            show_vendor: section.settings.show_vendor,
+            skip_styles: skip_card_product_styles,
+            section_id: section.id,
+            product_view_context: 'recommendation'
+          %}
+        </li>
+        {%- assign skip_card_product_styles = true -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- if tile_count > 0 -%}
+      <h2 class="product-tile-row__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
-      <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-        role="list"
+      <product-tile-row
+        class="product-tile-row"
+        style="--tile-columns-desktop: {{ section.settings.columns_desktop }}; --tile-columns-mobile: {{ section.settings.columns_mobile }};"
       >
-        {% assign skip_card_product_styles = false %}
-        {% for recommendation in recommendations.products %}
-          <li class="grid__item">
-            {% render 'card-product',
-              card_product: recommendation,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              skip_styles: skip_card_product_styles,
-              product_view_context: 'recommendation'
-            %}
-          </li>
-          {%- assign skip_card_product_styles = true -%}
-        {% endfor %}
-      </ul>
-    {% endif %}
+        {% render 'product-tile-row-nav' %}
+        <ul class="product-tile-row__list" role="list">
+          {{ tiles }}
+        </ul>
+      </product-tile-row>
+    {%- endif -%}
   </product-recommendations>
-  {% if section.settings.image_shape == 'arch' %}
-    {{ 'mask-arch.svg' | inline_asset_content }}
-  {%- endif -%}
 </div>
 
 {% schema %}
@@ -104,6 +119,12 @@
       "label": "t:sections.all.heading_size.label"
     },
     {
+      "type": "collection",
+      "id": "fallback_collection",
+      "label": "Fallback collection",
+      "info": "Shown while Shopify's recommendations load, or when there are none yet. Defaults to the product's first collection."
+    },
+    {
       "type": "range",
       "id": "products_to_show",
       "min": 2,
@@ -135,7 +156,13 @@
           "value": "2",
           "label": "t:sections.related-products.settings.columns_mobile.options__2.label"
         }
-      ]    
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": false
     },
     {
       "type": "color_scheme",
@@ -169,46 +196,6 @@
       "label": "t:sections.related-products.settings.image_ratio.label"
     },
     {
-      "type": "select",
-      "id": "image_shape",
-      "options": [
-        {
-          "value": "default",
-          "label": "t:sections.all.image_shape.options__1.label"
-        },
-        {
-          "value": "arch",
-          "label": "t:sections.all.image_shape.options__2.label"
-        },
-        {
-          "value": "blob",
-          "label": "t:sections.all.image_shape.options__3.label"
-        },
-        {
-          "value": "chevronleft",
-          "label": "t:sections.all.image_shape.options__4.label"
-        },
-        {
-          "value": "chevronright",
-          "label": "t:sections.all.image_shape.options__5.label"
-        },
-        {
-          "value": "diamond",
-          "label": "t:sections.all.image_shape.options__6.label"
-        },
-        {
-          "value": "parallelogram",
-          "label": "t:sections.all.image_shape.options__7.label"
-        },
-        {
-          "value": "round",
-          "label": "t:sections.all.image_shape.options__8.label"
-        }
-      ],
-      "default": "default",
-      "label": "t:sections.all.image_shape.label"
-    },
-    {
       "type": "checkbox",
       "id": "show_secondary_image",
       "default": false,
@@ -219,13 +206,6 @@
       "id": "show_vendor",
       "default": false,
       "label": "t:sections.related-products.settings.show_vendor.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "default": false,
-      "label": "t:sections.related-products.settings.show_rating.label",
-      "info": "t:sections.related-products.settings.show_rating.info"
     },
     {
       "type": "header",
