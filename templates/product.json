@@ -12,13 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -49,6 +42,21 @@
           "type": "description",
           "settings": {}
         },
+        "highlights": {
+          "type": "highlights",
+          "settings": {}
+        },
+        "info_accordion": {
+          "type": "info_accordion",
+          "settings": {
+            "nutrition_label": "Nutrition facts",
+            "nutrition_open": true,
+            "ingredients_label": "Ingredients & allergens",
+            "storage_label": "Storage & shelf life",
+            "manufacturer_label": "Manufacturer & legal",
+            "manufacturer": "<p>Marketed by: Mango Tree Bakers (C/O Muneshwar Prasad), Budha Colony Main Road, Budha Colony, Patna, Bihar, 800001, India (FSSAI Lic. No. 10425000001112)</p><p>Sourced and packed by: Snackme Nutrition Pvt. Ltd., 1637 FCI Rampur, Forbesganj, Araria, Bihar, 854318, India (FSSAI Lic. No. 10425360000084)</p><p>Customer care: <a href=\"mailto:customercare@wardham.in\" title=\"mailto:customercare@wardham.in\">customercare@wardham.in</a>, <a href=\"tel:+917651980816\" title=\"tel:+917651980816\">+91 76519 80816</a></p><p>Country of origin: India</p>"
+          }
+        },
         "share": {
           "type": "share",
           "settings": {
@@ -57,22 +65,23 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
         "description",
+        "highlights",
+        "info_accordion",
         "share"
       ],
       "settings": {
         "enable_sticky_info": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "gallery_layout": "thumbnail",
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",

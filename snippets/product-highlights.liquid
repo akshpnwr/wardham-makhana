@@ -1,0 +1,20 @@
+{%- doc -%}
+  Renders the product's highlight claims (custom.highlights list metafield) as an icon grid.
+
+  @param {object} product - The product.
+  @param {object} [block] - The block, for theme editor attributes.
+
+  @example
+  {% render 'product-highlights', product: product, block: block %}
+{%- enddoc -%}
+{%- assign highlights = product.metafields.custom.highlights.value -%}
+{%- if highlights != blank -%}
+  <ul class="product-highlights list-unstyled quick-add-hidden" role="list" {{ block.shopify_attributes }}>
+    {%- for highlight in highlights -%}
+      <li class="product-highlights__item">
+        {%- render 'icon-highlight', label: highlight -%}
+        <span>{{ highlight | escape }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

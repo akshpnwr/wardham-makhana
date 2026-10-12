@@ -12,6 +12,7 @@
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-product-info.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
@@ -107,31 +108,50 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {%- liquid
+                    assign price_variant = product.selected_or_first_available_variant
+                    capture tax_note
+                      if cart.duties_included and cart.taxes_included
+                        echo 'products.product.duties_and_taxes_included' | t
+                      elsif cart.taxes_included
+                        echo 'products.product.taxes_included' | t
+                      elsif cart.duties_included
+                        echo 'products.product.duties_included' | t
+                      endif
+                      if shop.shipping_policy.body != blank
+                        echo ' '
+                        echo 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url
+                      endif
+                    endcapture
+                    assign tax_note = tax_note | strip
+                  -%}
+                  <div id="price-{{ section.id }}" class="product__price" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,
                       show_badges: true,
                       price_class: 'price--large'
                     -%}
+                    {%- if price_variant.unit_price_measurement or tax_note != blank -%}
+                      <p class="product__price-meta product__tax caption rte">
+                        {%- if price_variant.unit_price_measurement -%}
+                          {%- render 'unit-price',
+                            price: price_variant.unit_price,
+                            measurement: price_variant.unit_price_measurement
+                          -%}
+                          {%- if tax_note != blank -%}
+                            <span class="product__price-meta-separator" aria-hidden="true">·</span>
+                          {%- endif -%}
+                        {%- endif -%}
+                        {%- if tax_note != blank -%}
+                          <span>{{ tax_note }}</span>
+                        {%- endif -%}
+                      </p>
+                    {%- endif -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
-                    </div>
-                  {%- endif -%}
-                  {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                    <div class="product__tax caption rte">
-                      {%- if cart.duties_included and cart.taxes_included -%}
-                        {{ 'products.product.duties_and_taxes_included' | t }}
-                      {%- elsif cart.taxes_included -%}
-                        {{ 'products.product.taxes_included' | t }}
-                      {%- elsif cart.duties_included -%}
-                        {{ 'products.product.duties_included' | t }}
-                      {%- endif -%}
-                      {%- if shop.shipping_policy.body != blank -%}
-                        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                      {%- endif -%}
                     </div>
                   {%- endif -%}
                   <div {{ block.shopify_attributes }}>
@@ -198,6 +218,10 @@
                       {{ product.description }}
                     </div>
                   {%- endif -%}
+                {%- when 'highlights' -%}
+                  {%- render 'product-highlights', product: product, block: block -%}
+                {%- when 'info_accordion' -%}
+                  {%- render 'product-info-accordion', product: product, block: block, section: section -%}
                 {%- when 'sku' -%}
                   <p
                     class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -947,6 +971,64 @@
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
+    },
+    {
+      "type": "highlights",
+      "name": "Highlights",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows the product's custom.highlights metafield as an icon grid. Hidden when the metafield is empty."
+        }
+      ]
+    },
+    {
+      "type": "info_accordion",
+      "name": "Product information",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Panels read the product's custom metafields (nutrition, ingredients, allergens, storage, shelf_life). Empty panels are hidden."
+        },
+        {
+          "type": "text",
+          "id": "nutrition_label",
+          "label": "Nutrition heading",
+          "default": "Nutrition facts"
+        },
+        {
+          "type": "checkbox",
+          "id": "nutrition_open",
+          "label": "Open nutrition by default",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "ingredients_label",
+          "label": "Ingredients heading",
+          "default": "Ingredients & allergens"
+        },
+        {
+          "type": "text",
+          "id": "storage_label",
+          "label": "Storage heading",
+          "default": "Storage & shelf life"
+        },
+        {
+          "type": "text",
+          "id": "manufacturer_label",
+          "label": "Manufacturer heading",
+          "default": "Manufacturer & legal"
+        },
+        {
+          "type": "richtext",
+          "id": "manufacturer",
+          "label": "Manufacturer details",
+          "info": "Shared by all products. A product's custom.manufacturer_override metafield replaces it."
+        }
+      ]
     },
     {
       "type": "share",

@@ -1,0 +1,30 @@
+{%- doc -%}
+  Renders one collapsible panel of the product information accordion,
+  using Dawn's accordion markup with a plus/minus indicator.
+
+  @param {string} id - Unique panel key within the block.
+  @param {string} heading - Panel heading.
+  @param {string} content - Panel HTML content.
+  @param {boolean} [open] - Whether the panel starts open (default: false).
+  @param {object} block - The parent block.
+  @param {object} section - The parent section.
+
+  @example
+  {% render 'product-info-panel', id: 'storage', heading: 'Storage', content: content, block: block, section: section %}
+{%- enddoc -%}
+<div class="product__accordion product-info__panel accordion">
+  <details id="Details-{{ id }}-{{ block.id }}-{{ section.id }}"{% if open %} open{% endif %}>
+    <summary>
+      <div class="summary__title">
+        <h2 class="h4 accordion__title">{{ heading | escape }}</h2>
+      </div>
+      <span class="product-info__toggle" aria-hidden="true">
+        <svg class="icon product-info__icon-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" focusable="false"><path d="M222,128a6,6,0,0,1-6,6H134v82a6,6,0,0,1-12,0V134H40a6,6,0,0,1,0-12h82V40a6,6,0,0,1,12,0v82h82A6,6,0,0,1,222,128Z"/></svg>
+        <svg class="icon product-info__icon-minus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" focusable="false"><path d="M222,128a6,6,0,0,1-6,6H40a6,6,0,0,1,0-12H216A6,6,0,0,1,222,128Z"/></svg>
+      </span>
+    </summary>
+    <div class="accordion__content rte" id="ProductInfo-{{ id }}-{{ block.id }}-{{ section.id }}">
+      {{ content }}
+    </div>
+  </details>
+</div>

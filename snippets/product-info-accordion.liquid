@@ -1,0 +1,95 @@
+{%- doc -%}
+  Renders the product information accordion: nutrition, ingredients & allergens,
+  storage & shelf life, and manufacturer details. Content comes from product
+  metafields (namespace "custom"); each panel is hidden when its content is empty.
+  Manufacturer details come from the block setting unless the product sets
+  custom.manufacturer_override.
+
+  @param {object} product - The product.
+  @param {object} block - The info_accordion block.
+  @param {object} section - The main-product section.
+
+  @example
+  {% render 'product-info-accordion', product: product, block: block, section: section %}
+{%- enddoc -%}
+{%- liquid
+  assign fields = product.metafields.custom
+  assign ingredients = fields.ingredients.value
+  assign allergens = fields.allergens.value
+  assign storage = fields.storage.value
+  assign shelf_life = fields.shelf_life.value
+  assign manufacturer_override = fields.manufacturer_override.value
+-%}
+
+{%- capture panels -%}
+  {%- if fields.nutrition.value != blank -%}
+    {%- capture content -%}{% render 'product-nutrition', product: product %}{%- endcapture -%}
+    {%- render 'product-info-panel',
+      id: 'nutrition',
+      heading: block.settings.nutrition_label,
+      content: content,
+      open: block.settings.nutrition_open,
+      block: block,
+      section: section
+    -%}
+  {%- endif -%}
+
+  {%- if ingredients != blank or allergens != blank -%}
+    {%- capture content -%}
+      {%- if ingredients != blank -%}
+        <p>{{ ingredients | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if allergens != blank -%}
+        <p class="product-info__allergens">{{ allergens | escape | newline_to_br }}</p>
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- render 'product-info-panel',
+      id: 'ingredients',
+      heading: block.settings.ingredients_label,
+      content: content,
+      block: block,
+      section: section
+    -%}
+  {%- endif -%}
+
+  {%- if storage != blank or shelf_life != blank -%}
+    {%- capture content -%}
+      {%- if storage != blank -%}
+        <p>{{ storage | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if shelf_life != blank -%}
+        <p><strong>Shelf life:</strong> {{ shelf_life | escape }}</p>
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- render 'product-info-panel',
+      id: 'storage',
+      heading: block.settings.storage_label,
+      content: content,
+      block: block,
+      section: section
+    -%}
+  {%- endif -%}
+
+  {%- if manufacturer_override != blank or block.settings.manufacturer != blank -%}
+    {%- capture content -%}
+      {%- if manufacturer_override != blank -%}
+        <p>{{ manufacturer_override | escape | newline_to_br }}</p>
+      {%- else -%}
+        {{ block.settings.manufacturer }}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- render 'product-info-panel',
+      id: 'manufacturer',
+      heading: block.settings.manufacturer_label,
+      content: content,
+      block: block,
+      section: section
+    -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if panels != blank -%}
+  <div class="product-info quick-add-hidden" {{ block.shopify_attributes }}>
+    {{ panels }}
+  </div>
+{%- endif -%}

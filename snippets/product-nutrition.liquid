@@ -1,0 +1,92 @@
+{%- doc -%}
+  Renders a nutrition table from the product's custom.nutrition metafield.
+  One nutrient per line as "Name | Value". A leading "- " marks a sub-row
+  (e.g. "- Saturated Fat | 4 g" under "Total Fat"). The first top-level
+  Energy/Calories row is pulled out and shown as a headline figure.
+
+  @param {object} product - The product.
+
+  @example
+  {% render 'product-nutrition', product: product %}
+{%- enddoc -%}
+{%- liquid
+  assign nutrition = product.metafields.custom.nutrition.value
+  assign basis = product.metafields.custom.nutrition_basis.value | default: 'Per 100 g'
+  assign serving_size = product.metafields.custom.serving_size.value
+  assign rows = nutrition | newline_to_br | split: '<br />'
+  assign energy_value = ''
+  assign group = ''
+-%}
+<div class="product-nutrition">
+  {%- capture table_rows -%}
+    {%- for raw_row in rows -%}
+      {%- liquid
+        assign row = raw_row | strip
+        if row == blank
+          continue
+        endif
+
+        assign is_sub = false
+        assign first_char = row | slice: 0
+        if first_char == '-'
+          assign is_sub = true
+          assign row = row | remove_first: '-' | strip
+        endif
+
+        assign name = row | split: '|' | first | strip
+        assign value = row | split: '|' | last | strip
+        unless row contains '|'
+          assign value = ''
+        endunless
+
+        assign name_key = name | downcase
+        if is_sub == false and energy_value == blank
+          if name_key == 'energy' or name_key == 'calories'
+            assign energy_value = value
+            continue
+          endif
+        endif
+      -%}
+      {%- if is_sub == false and group != blank -%}
+        <tbody class="product-nutrition__group">{{ group }}</tbody>
+        {%- assign group = '' -%}
+      {%- endif -%}
+      {%- capture row_html -%}
+        <tr{% if is_sub %} class="product-nutrition__sub"{% endif %}>
+          <th scope="row">{{ name | escape }}</th>
+          <td>{{ value | escape }}</td>
+        </tr>
+      {%- endcapture -%}
+      {%- assign group = group | append: row_html -%}
+    {%- endfor -%}
+    {%- if group != blank -%}
+      <tbody class="product-nutrition__group">{{ group }}</tbody>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- if energy_value != blank -%}
+    {%- assign energy_number = energy_value | split: ' ' | first -%}
+    {%- assign energy_unit = energy_value | remove_first: energy_number | strip -%}
+    <p class="product-nutrition__energy">
+      <span class="product-nutrition__energy-value">{{ energy_number | escape }}</span>
+      {%- if energy_unit != blank %} <span class="product-nutrition__energy-unit">{{ energy_unit | escape }}</span>{% endif %}
+      <span class="product-nutrition__energy-basis">{{ basis | downcase | escape }}</span>
+    </p>
+  {%- endif -%}
+
+  {%- if serving_size != blank -%}
+    <p class="product-nutrition__serving">Serving size: {{ serving_size | escape }}</p>
+  {%- endif -%}
+
+  {%- if table_rows != blank -%}
+    <table class="product-nutrition__table">
+      <thead class="visually-hidden">
+        <tr>
+          <th scope="col">Nutrient</th>
+          <th scope="col">{{ basis | escape }}</th>
+        </tr>
+      </thead>
+      {{ table_rows }}
+    </table>
+  {%- endif -%}
+</div>

@@ -1,0 +1,229 @@
+/* Product page right column: title, price meta, highlights, information accordion. */
+
+/* Title */
+.product__info-container .product__title h1 {
+  font-size: 2.6rem;
+  line-height: 1.15;
+}
+
+@media screen and (min-width: 990px) {
+  .product__info-container .product__title h1 {
+    font-size: 3.4rem;
+  }
+}
+
+/* Price meta: unit price · tax note */
+.product__price .price .unit-price {
+  display: none;
+}
+
+.product__price .product__price-meta {
+  margin: 0.4rem 0 0;
+  font-size: 1.3rem;
+  letter-spacing: 0.02rem;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.product__price-meta .unit-price {
+  display: inline;
+  margin: 0;
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.product__price-meta-separator {
+  margin: 0 0.6rem;
+}
+
+.product__price-meta a {
+  color: inherit;
+}
+
+/* Highlights */
+.product-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+  margin: 2.5rem 0;
+}
+
+.product-highlights__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+.product-highlights__item .icon-highlight {
+  flex: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  color: rgb(var(--color-button));
+}
+
+/* Information accordion */
+.product-info {
+  margin: 2.5rem 0;
+}
+
+.product-info .product-info__panel {
+  margin: 0;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.product-info .product-info__panel + .product-info__panel {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
+}
+
+.product-info__panel summary {
+  align-items: center;
+  padding: 1.8rem 0;
+  cursor: pointer;
+}
+
+.product-info__panel .accordion__title {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.product-info__toggle {
+  display: inline-flex;
+  flex: none;
+  color: rgb(var(--color-foreground));
+}
+
+.product-info__toggle .icon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.product-info__panel .product-info__icon-minus,
+.product-info__panel details[open] > summary .product-info__icon-plus {
+  display: none;
+}
+
+.product-info__panel details[open] > summary .product-info__icon-minus {
+  display: block;
+}
+
+.product-info__panel .accordion__content {
+  padding: 0 0 0.6rem;
+  margin-bottom: 1.8rem;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.product-info__panel .accordion__content > :first-child {
+  margin-top: 0;
+}
+
+.product-info__panel .accordion__content > :last-child {
+  margin-bottom: 0;
+}
+
+.product-info__panel details[open] > .accordion__content {
+  animation: product-info-reveal 0.25s ease-out;
+}
+
+@keyframes product-info-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-info__panel details[open] > .accordion__content {
+    animation: none;
+  }
+}
+
+.product-info__allergens {
+  padding-left: 1.2rem;
+  border-left: 0.2rem solid rgb(var(--color-button));
+  color: rgb(var(--color-foreground));
+  font-weight: 500;
+}
+
+/* Nutrition */
+.product-nutrition__energy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+  margin: 0 0 0.2rem;
+}
+
+.product-nutrition__energy-value {
+  font-family: var(--font-heading-family);
+  font-size: 4rem;
+  line-height: 1;
+  color: rgb(var(--color-foreground));
+}
+
+.product-nutrition__energy-unit {
+  font-size: 1.6rem;
+  color: rgb(var(--color-foreground));
+}
+
+.product-nutrition__energy-basis,
+.product-nutrition__serving {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.product-nutrition__serving {
+  margin: 0 0 1.2rem;
+}
+
+.rte .product-nutrition__table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  border: 0;
+  box-shadow: none;
+  font-size: 1.4rem;
+}
+
+.product-nutrition__table th,
+.product-nutrition__table td {
+  padding: 0.5rem 0;
+  border: 0;
+  text-align: left;
+  font-weight: 400;
+}
+
+.rte .product-nutrition__table td {
+  padding-left: 1.2rem;
+  padding-right: 0;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--color-foreground));
+}
+
+.product-nutrition__group + .product-nutrition__group {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
+}
+
+.product-nutrition__group > tr:first-child > * {
+  padding-top: 0.8rem;
+}
+
+.product-nutrition__group > tr:last-child > * {
+  padding-bottom: 0.8rem;
+}
+
+.product-nutrition__sub th {
+  padding-left: 1.6rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
