@@ -309,6 +309,22 @@
   margin-bottom: 0;
 }
 
+/* The display heading font is too light at card size; use the body font so product titles stay legible. */
+.product-card-wrapper .card__heading {
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  font-size: calc(var(--font-body-scale) * 1.5rem);
+  letter-spacing: 0.02rem;
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 750px) {
+  .product-card-wrapper .card__heading {
+    font-size: calc(var(--font-body-scale) * 1.6rem);
+  }
+}
+
 .card--horizontal .card__heading,
 .card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {

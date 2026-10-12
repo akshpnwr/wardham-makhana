@@ -95,7 +95,7 @@
         "products_to_show": 10,
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
         "image_ratio": "adapt",
         "show_secondary_image": false,
         "show_vendor": false,
@@ -112,7 +112,7 @@
         "products_to_show": 8,
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
+        "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
         "padding_top": 24,
         "padding_bottom": 36,
         "full_width": false
