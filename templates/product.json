@@ -27,6 +27,10 @@
             "swatch_shape": "circle"
           }
         },
+        "highlights": {
+          "type": "highlights",
+          "settings": {}
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -57,13 +61,14 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "highlights",
         "share_icons",
         "product_details"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
-        "media_size": "large",
+        "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
         "gallery_layout": "thumbnail",
