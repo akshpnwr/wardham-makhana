@@ -52,18 +52,19 @@
         "button"
       ],
       "custom_css": [
-        ".caption-with-letter-spacing,.banner__heading {color: #0a3a24;}",
+        ".color-scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560 .caption-with-letter-spacing,.color-scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560 .banner__heading {color: #0a3a24;}",
+        ".color-scheme-7c3e9a51-2b8d-4f6e-9a1c-5d0e8b4f2a67 .banner__heading,.color-scheme-7c3e9a51-2b8d-4f6e-9a1c-5d0e8b4f2a67 .banner__text,.color-scheme-7c3e9a51-2b8d-4f6e-9a1c-5d0e8b4f2a67 .caption-with-letter-spacing {text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);}",
         ".caption-with-letter-spacing {font-size: 14px;}"
       ],
       "settings": {
-        "image": "shopify://shop_images/milk-swirling-as-poured-in-coffee.jpg",
-        "image_overlay_opacity": 10,
+        "image": "shopify://shop_images/2N0A7367.jpg",
+        "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
         "show_text_box": false,
-        "color_scheme": "scheme-de0e778c-0fe1-461e-a54a-6508a2d0a560",
+        "color_scheme": "scheme-7c3e9a51-2b8d-4f6e-9a1c-5d0e8b4f2a67",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
@@ -123,7 +124,7 @@
         ".multicolumn-card__image-wrapper--third-width {width: 20%;}",
         ".multicolumn-card__info {padding-block: 10px; text-transform: uppercase;}",
         ".multicolumn-card__info .rte {font-size: 14px;}",
-        "@media (max-width: 480px) {.multicolumn-card__image-wrapper--third-width {width: 25%; } .multicolumn-card__info {padding-inline: 10px;} .multicolumn-card__info .rte {font-size: 12px; }}"
+        "@media (max-width: 480px) {.multicolumn-card__image-wrapper--third-width {width: 25%; } .multicolumn-card__info {padding-inline: 10px; } .multicolumn-card__info .rte {font-size: 12px; }}"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
