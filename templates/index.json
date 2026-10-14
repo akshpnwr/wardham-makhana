@@ -294,7 +294,7 @@
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/home-why-wardham.jpg",
+        "image": "shopify://shop_images/2N0A7257.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -317,7 +317,7 @@
       ],
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "collection": "",
+        "collection": "frontpage",
         "products_to_show": 4,
         "title": "— BEST SELLERS",
         "heading_size": "h2",
@@ -354,7 +354,7 @@
         "image_AY9CaH": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/home-ingredient-2.jpg"
+            "image": "shopify://shop_images/raw-makhana-in-a-brown-bowl.png"
           }
         },
         "text_QcYQCK": {
