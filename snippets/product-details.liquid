@@ -3,7 +3,8 @@
   (country of origin, MRP, shelf life).
 
   Benefits come from the product's custom.benefits metafield when set, one per
-  line as "Lead | Text" (shown as a bold lead and a dash). Otherwise the block's
+  line as "Lead | Text" (shown as a bold lead and a dash). Plain lines show as
+  paragraphs, and lines starting with "- " as a bulleted list. Otherwise the block's
   shared benefits rich text is used.
 
   @param {object} product - The product.
@@ -30,9 +31,17 @@
 <div class="product-details rte" {{ block.shopify_attributes }}>
   {%- if benefits != blank -%}
     {%- assign lines = benefits | newline_to_br | split: '<br />' -%}
+    {%- assign in_list = false -%}
     {%- for raw_line in lines -%}
       {%- assign line = raw_line | strip -%}
       {%- if line == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign first_two = line | slice: 0, 2 -%}
+      {%- if first_two == '- ' -%}
+        {%- unless in_list -%}<ul>{%- assign in_list = true -%}{%- endunless -%}
+        <li>{{ line | remove_first: '- ' | strip | escape }}</li>
+        {%- continue -%}
+      {%- endif -%}
+      {%- if in_list -%}</ul>{%- assign in_list = false -%}{%- endif -%}
       {%- if line contains '|' -%}
         {%- assign lead = line | split: '|' | first | strip -%}
         {%- assign text = line | remove_first: lead | remove_first: '|' | strip -%}
@@ -41,6 +50,7 @@
         <p>{{ line | escape }}</p>
       {%- endif -%}
     {%- endfor -%}
+    {%- if in_list -%}</ul>{%- endif -%}
   {%- else -%}
     {{ block.settings.benefits }}
   {%- endif -%}
