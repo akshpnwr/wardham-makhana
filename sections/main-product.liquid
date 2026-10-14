@@ -130,6 +130,16 @@
                       endif
                     endcapture
                     assign tax_note = tax_note | strip
+
+                    # Pack size comes from the title, e.g. "Cheddar Cheese Makhana Standies (45g)"
+                    assign show_unit_price = false
+                    if block.settings.show_price_per_gram and product.title contains '(' and product.title contains 'g)'
+                      assign pack_grams = product.title | split: '(' | last | split: 'g)' | first | strip | times: 1.0
+                      if pack_grams > 0
+                        assign price_per_gram = price_variant.price | divided_by: pack_grams | round
+                        assign show_unit_price = true
+                      endif
+                    endif
                   -%}
                   <div id="price-{{ section.id }}" class="product__price" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
@@ -138,13 +148,13 @@
                       show_badges: true,
                       price_class: 'price--large'
                     -%}
-                    {%- if price_variant.unit_price_measurement or tax_note != blank -%}
+                    {%- if show_unit_price or tax_note != blank -%}
                       <p class="product__price-meta product__tax caption rte">
-                        {%- if price_variant.unit_price_measurement -%}
-                          {%- render 'unit-price',
-                            price: price_variant.unit_price,
-                            measurement: price_variant.unit_price_measurement
-                          -%}
+                        {%- if show_unit_price -%}
+                          <small class="unit-price caption">
+                            <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                            <span class="price-item price-item--last">{{ price_per_gram | money }} / g</span>
+                          </small>
                           {%- if tax_note != blank -%}
                             <span class="product__price-meta-separator" aria-hidden="true">·</span>
                           {%- endif -%}
@@ -836,7 +846,16 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_price_per_gram",
+          "label": "Show price per gram",
+          "info": "Price divided by the pack size in the product title, e.g. (45g).",
+          "default": true
+        }
+      ]
     },
     {
       "type": "sku",
