@@ -292,6 +292,50 @@
 .card__media .media img {
   height: 100%;
   object-fit: cover;
+}
+
+/* Keep tall packs (canisters, pouches) fully visible in fixed-ratio product cards */
+/* Let cards fill the grid row so short titles don't make shorter cards */
+.grid__item > product-component {
+  height: 100%;
+}
+
+.product-card-wrapper .card__inner,
+.product-card-wrapper .card__media .media {
+  background-color: #fff;
+}
+
+.product-card-wrapper .price-item--sale,
+.product-card-wrapper .price__regular .price-item--regular {
+  font-weight: 600;
+}
+
+/* Quick-add: pill to match badges, filled brand colour, soft tint when sold out */
+.product-card-wrapper .quick-add__submit {
+  --buttons-radius: 4rem;
+  --buttons-radius-outset: 4rem;
+  --color-button: var(--color-secondary-button-text);
+  --color-button-text: var(--color-secondary-button);
+  min-height: 4.2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+}
+
+.product-card-wrapper .quick-add__submit:disabled,
+.product-card-wrapper .quick-add__submit[aria-disabled='true'] {
+  --alpha-button-background: 0.08;
+  opacity: 1;
+  color: rgba(var(--color-secondary-button-text), 0.65);
+}
+
+.product-card-wrapper .quick-add__submit:disabled::after,
+.product-card-wrapper .quick-add__submit[aria-disabled='true']::after {
+  box-shadow: none;
+}
+
+.product-card-wrapper .card__media .media img {
+  object-fit: contain;
   object-position: center center;
   width: 100%;
 }

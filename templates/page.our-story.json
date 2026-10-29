@@ -31,14 +31,14 @@
         "heading_YgzaLw": {
           "type": "heading",
           "settings": {
-            "heading": "A quieter idea of a snack.",
+            "heading": "Quality first, and no compromise.",
             "heading_size": "hxl"
           }
         },
         "text_e6F6Vb": {
           "type": "text",
           "settings": {
-            "text": "<p>Wardham began with a simple frustration — that the healthiest thing on the shelf was also the most forgettable. So we set out to make a makhana worth slowing down for.</p>"
+            "text": "<p>Wardham begins with roasted makhana, made the way Mr Raj Kumar Ahuja has always made things: go to the source, and never ship what you would not keep.</p>"
           }
         }
       },
@@ -80,19 +80,19 @@
         "paragraph_xUBXDT": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>On a monsoon visit to Darbhanga, our founder watched farmers wade chest-deep to hand-harvest fox nuts — a crop that has fed this region for centuries, sold onward for pennies and rarely credited.</p>"
+            "text": "<p>In the early 1990s Mr Raj Kumar Ahuja left a secure career for a trade he had never touched: leather. In Kanpur, his home, he founded a small firm and did what nobody around him was doing. He went to Walsall for the finest English bridle leather, and brought it to Indian hands.</p>"
           }
         },
         "paragraph_7jMXnJ": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>The makhana that came home from that trip, simply roasted in a clay pan, was better than anything on a supermarket shelf. The question wrote itself: <em>why does the honest version never make it to the city?</em></p>"
+            "text": "<p>For more than thirty years he built on one rule: <em>go to the source, and never ship what you would not keep.</em> The finest saddlery houses of Europe and North America trusted his workshop with their names, and from 2005 his son built the manufacturing house beside him.</p>"
           }
         },
         "paragraph_dL6rpA": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Wardham is our answer — a direct line from those ponds to your pantry, with the farmers paid fairly and the makhana treated with the care it always deserved.</p>"
+            "text": "<p>At seventy, with that work settled, he found his next table. He had heard makhana spoken of as a food India could be proud of, and he did what he always does. He researched it properly, then travelled to the ponds of north Bihar, where nearly all of India’s makhana is grown and gathered by hand. He visited several growers before he found one who worked with the honesty he insists on. Only then did he shake hands.</p>"
           }
         }
       },
@@ -107,7 +107,7 @@
       "name": "Wardham Beginning",
       "settings": {
         "eyebrow": "— The beginning",
-        "heading": "It started in a Bihar wetland.",
+        "heading": "It started with leather, in Kanpur.",
         "heading_size": "h1",
         "heading_position": "left",
         "color_scheme": "scheme-29d2a4b8-cb3d-485d-b2d4-3951a793dccb",
@@ -128,14 +128,14 @@
         "heading_QW8keN": {
           "type": "heading",
           "settings": {
-            "heading": "<em>We didn't want to invent a new snack. We wanted to give an old, honest one the respect it was always owed.</em>",
+            "heading": "<em>Go to the source, and never ship what you would not keep.</em>",
             "heading_size": "h1"
           }
         },
         "caption_4zEj9M": {
           "type": "caption",
           "settings": {
-            "caption": "Mr. Raj Das Ahhujaa · Founder",
+            "caption": "Mr Raj Kumar Ahuja · Founder",
             "text_style": "caption-with-letter-spacing",
             "text_size": "medium"
           }
@@ -173,14 +173,14 @@
         "heading_wYBcxT": {
           "type": "heading",
           "settings": {
-            "heading": "Three quiet promises.",
+            "heading": "The corner nobody would see.",
             "heading_size": "h1"
           }
         },
         "text_AbRwai": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+            "text": "<p>What goes into a pack of Wardham is the same thing that went into every piece he ever made: a refusal to cut the corner nobody would see.</p>"
           }
         }
       },
@@ -209,8 +209,8 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/honest-ingredient.png",
-            "title": "Honest by default",
-            "text": "<p>One ingredient list you can read aloud. No preservatives, no palm oil, no numbers pretending to be food.</p>",
+            "title": "Chosen by hand",
+            "text": "<p>The seed is chosen by hand, not by hurry.</p>",
             "link_label": "",
             "link": ""
           }
@@ -219,8 +219,8 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/roasted-not-fried_691f862a-a882-479b-a7d5-91e7b9dc267f.png",
-            "title": "Roasted, never fried",
-            "text": "<p>Slow-roasted in small batches to keep the crunch light and the nutrition intact — the way it was always meant to be made.</p>",
+            "title": "Roasted slowly",
+            "text": "<p>The roast is slow, because slow is how it comes out right.</p>",
             "link_label": "",
             "link": ""
           }
@@ -229,8 +229,8 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/fair-from-source.png",
-            "title": "Fair from the source",
-            "text": "<p>Bought directly from farming families at prices agreed before the season, so the people who grow it are the ones who gain.</p>",
+            "title": "Seasoned honestly",
+            "text": "<p>The seasoning is honest, and never more than the makhana can carry.</p>",
             "link_label": "",
             "link": ""
           }
@@ -272,7 +272,7 @@
         "caption_BHxqgF": {
           "type": "caption",
           "settings": {
-            "caption": "— The people behind it",
+            "caption": "— The man behind it",
             "text_style": "caption-with-letter-spacing",
             "text_size": "medium"
           }
@@ -280,22 +280,22 @@
         "heading_BALfpQ": {
           "type": "heading",
           "settings": {
-            "heading": "Fairness you can taste.",
+            "heading": "Made for the people who notice.",
             "heading_size": "h1"
           }
         },
         "text_kNiCmr": {
           "type": "text",
           "settings": {
-            "text": "<p>We buy directly from 200+ farming families across Bihar's Mithila belt — no middlemen, no auction floors. Prices are agreed before the season, so a good harvest rewards the grower, not the trader.</p><p>A share of every pouch funds cold-storage and popping equipment in the villages we work with — reducing the back-breaking hand-labour the craft has always demanded.</p>",
+            "text": "<p>If a batch is not good enough for his own table, it does not leave the house, and nothing is written on the pack that is not true inside it. This is not a policy. It is a man’s character, and it is the happiest thing about him: that at seventy he still takes a plain, unhurried joy in doing a thing properly, and in handing it to someone he knows will notice.</p><p>If you are a person who reads the back of the pack, who chooses carefully for the people you feed, and who feels something when a thing is made with care, you already understand him. Wardham was made for you.</p>",
             "text_style": "body"
           }
         },
         "button_UBTCx4": {
           "type": "button",
           "settings": {
-            "button_label": "Read our sourcing charter →",
-            "button_link": "shopify://pages/our-story",
+            "button_label": "Shop the range →",
+            "button_link": "shopify://collections/all",
             "button_style_secondary": true
           }
         }
@@ -333,33 +333,33 @@
         "milestone_efijCD": {
           "type": "milestone",
           "settings": {
-            "year": "2021",
-            "title": "A monsoon visit",
-            "text": "<p>A trip to Darbhanga turns a family snack into an obsession. The first pan-roasted batches are shared with friends in Mumbai.</p>"
+            "year": "1990s",
+            "title": "A trade he had never touched",
+            "text": "<p>Mr Ahuja leaves a secure career and founds a small leather firm in Kanpur, bringing the finest English bridle leather from Walsall to Indian hands.</p>"
           }
         },
         "milestone_PGMe6V": {
           "type": "milestone",
           "settings": {
-            "year": "2022",
-            "title": "The first partnership",
-            "text": "<p>We sign our earliest direct agreements with 40 farming families in the Mithila belt, cutting out the auction floor entirely.</p>"
+            "year": "2005",
+            "title": "A house built beside him",
+            "text": "<p>Trusted by the finest saddlery houses of Europe and North America, the workshop grows as his son builds the manufacturing house beside him.</p>"
           }
         },
         "milestone_fdcVwq": {
           "type": "milestone",
           "settings": {
-            "year": "2024",
-            "title": "Wardham is born",
-            "text": "<p>Four flavours launch online. The name — from a word for a gift given with respect — becomes the promise on every pouch.</p>"
+            "year": "At 70",
+            "title": "The ponds of north Bihar",
+            "text": "<p>He researches makhana properly, visits several growers, and shakes hands only with one who works with the honesty he insists on.</p>"
           }
         },
         "milestone_PpKMDx": {
           "type": "milestone",
           "settings": {
-            "year": "2026",
-            "title": "A wider table",
-            "text": "<p>Now working with 200+ families and funding village-level cold storage, we roast more mindfully than ever, and grow slowly on purpose.</p>"
+            "year": "Today",
+            "title": "Wardham begins",
+            "text": "<p>Named from the Sanskrit <em>vardhanam</em>, to grow and to nourish, Wardham begins with roasted makhana. There is more to come, all made with quality first.</p>"
           }
         }
       },
@@ -407,7 +407,7 @@
           "type": "question",
           "settings": {
             "question": "Where do you source your makhana?",
-            "answer": "<p>Directly from 200+ farming families across Bihar’s Mithila belt, at prices agreed before the season. No middlemen, no auction floors — so the growers are the ones who gain.</p>"
+            "answer": "<p>From the ponds of north Bihar, where nearly all of India’s makhana is grown and gathered by hand. Our founder visited several growers before choosing one who works with the honesty he insists on.</p>"
           }
         },
         "question_DYNepf": {
@@ -451,7 +451,7 @@
         "heading_PF8id4": {
           "type": "heading",
           "settings": {
-            "heading": "Taste the difference honesty makes.",
+            "heading": "Made properly, for people who notice.",
             "heading_size": "hxl"
           }
         },
