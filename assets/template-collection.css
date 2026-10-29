@@ -97,3 +97,33 @@
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
 }
+
+.collection__view-all .button {
+  --buttons-radius: 4rem;
+  --buttons-radius-outset: 4rem;
+  gap: 1rem;
+  min-height: 4.6rem;
+  padding: 0 3.2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.08rem;
+  transition: background-color var(--duration-short) ease, color var(--duration-short) ease;
+}
+
+.collection__view-all .button .icon-wrap {
+  display: flex;
+}
+
+.collection__view-all .button .icon-arrow {
+  width: 1.4rem;
+}
+
+.collection__view-all .button--secondary:hover {
+  --color-button: var(--color-secondary-button-text);
+  --color-button-text: var(--color-secondary-button);
+}
+
+/* Room below the card shadows, whatever the View all style */
+.collection__view-all {
+  margin-top: 3.2rem;
+}
